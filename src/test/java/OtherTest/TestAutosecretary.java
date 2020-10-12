@@ -5,9 +5,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.openqa.selenium.json.Json;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;

@@ -5,8 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
-import org.json.JSONArray;
-import org.json.JSONObject;
+
 import org.testng.annotations.Test;
 
 public class TestContactAddPres {
@@ -167,6 +166,7 @@ public class TestContactAddPres {
         return main_json.toString();
     }
 
+    /*
     @Test
     public void testJSON() {
         // JSON libraries
@@ -184,6 +184,7 @@ public class TestContactAddPres {
         System.out.println(requestParams.getJSONArray("atribut1").getJSONObject(0).getJSONObject("atribut2").getString("atribut3"));
 
     }
+    */
 
     @Test
     public void testGSON() {

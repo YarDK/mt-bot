@@ -15,8 +15,8 @@ public class RMcreator {
     private static WebDriver wd;
 
     public static void main(String[] args) {
-        String old_url = "http://redmine.mango.local/issues/220501";
-        String new_url = "http://redmine.mango.local/issues/223787";
+        String old_url = "http://redmine.mango.local/issues/223787";
+        String new_url = "http://redmine.mango.local/issues/226038";
         init(old_url, new_url);
         stop();
     }
@@ -34,9 +34,9 @@ public class RMcreator {
 
     public static void init(String old_url, String new_url) {
         // System.setProperty("webdriver.chrome.driver", "../RMapp/src/main/resources/chromedriver.exe");
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
-        wd = new ChromeDriver(chromeOptions);
+        //ChromeOptions chromeOptions = new ChromeOptions();
+        //chromeOptions.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+        wd = new ChromeDriver();
 
         wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         wd.get(old_url);
@@ -48,7 +48,16 @@ public class RMcreator {
 
         List<WebElement> list_ticket_element = wd.findElements(By.xpath("//*[@class='status']/.."));
         System.out.println("All tikets in issue:");
-        list_ticket_element.forEach(System.out::println);
+        list_ticket_element
+                .forEach(e ->
+                        System.out.println(
+                                e.findElement(By.cssSelector("td.subject"))
+                                        .findElement(By.tagName("a"))
+                                        .getText()
+                                        .split("#")[1]
+                        )
+                );
+
         List<String> list_ticket = new ArrayList<>();
 
 
@@ -56,7 +65,6 @@ public class RMcreator {
         for (WebElement e : list_ticket_element) {
             String number_ticket = e.findElement(By.cssSelector("td.subject")).findElement(By.tagName("a")).getText().split("#")[1];
             String status = e.findElement(By.cssSelector("td.status")).getText();
-            System.out.println("Hear was anything text:");
             if (!status.equals("Закрыт") && !status.equals("Отклонен")){
                 System.out.println(number_ticket);
                 list_ticket.add(number_ticket);

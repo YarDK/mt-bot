@@ -8,8 +8,6 @@ import com.google.gson.JsonParser;
 import com.jayway.restassured.RestAssured;
 
 import com.jayway.restassured.http.ContentType;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.testng.annotations.Test;
 
 public class TestContactAddProd {
@@ -168,6 +166,7 @@ public class TestContactAddProd {
         return main_json.toString();
     }
 
+    /*
     @Test
     public void testJSON() {
         // JSON libraries
@@ -183,8 +182,8 @@ public class TestContactAddProd {
         System.out.println(requestParams.getJSONArray("atribut1"));
         System.out.println(requestParams.getJSONArray("atribut1").getJSONObject(0).getJSONObject("atribut2"));
         System.out.println(requestParams.getJSONArray("atribut1").getJSONObject(0).getJSONObject("atribut2").getString("atribut3"));
-
     }
+     */
 
     @Test
     public void testGSON() {
