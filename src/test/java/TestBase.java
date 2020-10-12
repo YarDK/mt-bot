@@ -6,9 +6,11 @@ import org.testng.annotations.BeforeSuite;
 public class TestBase {
     protected static MainApplication app = new MainApplication();
 
+
+
     @BeforeSuite
     public void setUp(){
-        app.init("prod");
+        app.init(System.getProperty("environment"));
     }
 
     @AfterSuite(alwaysRun = true)

@@ -65,7 +65,7 @@ public class ContactAbTests extends TestBase{
                 1000,
                 "Contact remove failed, result not 1000");
 
-        app.waiter(1000); // Ждем 3 сек, что бы в БД успела обновиться информация
+        app.waiter(1000); // Ждем 1 сек, что бы в БД успела обновиться информация
 
         JsonObject contact_get_response = app.contact().addressBookGetContact(product_id, contact_id);
         Assert.assertEquals(

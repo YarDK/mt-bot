@@ -2,6 +2,10 @@ package ApplicationManager;
 
 import Models.RegisterData;
 import Requests.*;
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.Parameter;
+import com.beust.jcommander.ParameterException;
+
 public class MainApplication extends MainMethods{
 
     private RegisterData registerData;
@@ -12,6 +16,7 @@ public class MainApplication extends MainMethods{
     private SessionsRequests sessionsRequests;
 
     public void init(String environment) {
+        System.out.println(String.format("ENVIRONMENT - Tests running on environment: %s\n",environment));
         registerData = new RegisterHelper().registerData(environment);
         sessionsRequests = new SessionsRequests(registerData);
         sessionsRequests.authorisation();

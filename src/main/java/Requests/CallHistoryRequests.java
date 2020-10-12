@@ -2,7 +2,6 @@ package Requests;
 
 import ApplicationManager.MainApplication;
 import Jsons.JsonCallHistory;
-import Jsons.JsonPersonalChat;
 import Models.RegisterData;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
