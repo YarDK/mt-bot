@@ -10,11 +10,14 @@ public class TestBase {
 
     @BeforeSuite
     public void setUp(){
-        app.init(System.getProperty("environment"));
+        app.init(System.getProperty("environment","prod"));
+        app.testrail().init();
+        app.testrail().startRun();
     }
 
     @AfterSuite(alwaysRun = true)
     public void tearDown(){
         app.stop();
+        app.testrail().closeRun();
     }
 }

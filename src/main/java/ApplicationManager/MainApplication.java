@@ -1,14 +1,13 @@
 package ApplicationManager;
 
 import Models.RegisterData;
+import Models.TestrailData;
 import Requests.*;
-import com.beust.jcommander.JCommander;
-import com.beust.jcommander.Parameter;
-import com.beust.jcommander.ParameterException;
 
 public class MainApplication extends MainMethods{
 
     private RegisterData registerData;
+    private TestrailHelper testrailHelper;
     private CallHistoryRequests callHistoryRequests;
     private ChatRequests chatRequests;
     private ContactRequest contactRequest;
@@ -28,7 +27,10 @@ public class MainApplication extends MainMethods{
         contactRequest = new ContactRequest(registerData);
         profileRequests = new ProfileRequests(registerData);
 
+        testrailHelper = new TestrailHelper();
+
     }
+
 
     public void stop(){
         sessionsRequests.unregister();
@@ -37,6 +39,8 @@ public class MainApplication extends MainMethods{
     public RegisterData data(){
         return registerData;
     }
+
+    public TestrailHelper testrail(){return testrailHelper;}
 
     public SessionsRequests session(){
         return sessionsRequests;
