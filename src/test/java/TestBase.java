@@ -10,7 +10,7 @@ public class TestBase {
 
     @BeforeSuite
     public void setUp(){
-        app.init(System.getProperty("environment","prod"));
+        app.init(System.getProperty("environment","pres"));
         app.testrail().init();
         app.testrail().startRun();
     }
