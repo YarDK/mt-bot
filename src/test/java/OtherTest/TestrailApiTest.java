@@ -5,6 +5,7 @@ import com.codepine.api.testrail.model.*;
 import org.testng.annotations.Test;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -39,7 +40,32 @@ public class TestrailApiTest {
         System.out.println("Список кейсов:");
         List<CaseField> customCaseFields = testRail.caseFields().list().execute();
         List<Case> case_list = testRail.cases().list(6, 6026, customCaseFields).execute();
-        case_list.forEach(System.out::println);
+        //case_list.forEach(System.out::println);
+        /*
+        for(Case c : case_list){
+            System.out.println("\nID: " + c.getId());
+            System.out.println("Title: " + c.getTitle());
+            System.out.println("Preconds: \n" + c.getCustomField("preconds"));
+            System.out.println("Steps_separated: " + c.getCustomField("steps_separated"));
+        }
+        */
+
+        for(Case c : case_list){
+            if(c.getCustomField("preconds") != null){
+                System.out.println("Вот тут что-то должно быть:\n");
+                String preconds = c.getCustomField("preconds");
+                String[] arr = preconds.split("\n");
+                System.out.println(arr.length);
+                try {
+                    Arrays.asList(arr).stream().forEach(i -> System.out.println(
+                            "Parameter: " + i.split("=")[0] + "\nvalue: " + i.split("=")[1]
+                    ));
+                } catch (ArrayIndexOutOfBoundsException e){
+                    System.out.println(preconds);
+                }
+            }
+        }
+
 
         // Создаем новый кейс для сьюта
         //List<CaseField> customCaseFields = testRail.caseFields().list().execute();
@@ -52,8 +78,8 @@ public class TestrailApiTest {
         String data = formatter.format(date);
 
         // Создаем ран
-        String run_name = "run authotest " + data;
-        Run run = testRail.runs().add(project.getId(), new Run().setSuiteId(suite.getId()).setName(run_name)).execute();
+        //String run_name = "run authotest " + data;
+        //Run run = testRail.runs().add(project.getId(), new Run().setSuiteId(suite.getId()).setName(run_name)).execute();
 
 
         /* add test result
@@ -69,7 +95,7 @@ public class TestrailApiTest {
         */
 
         // close run
-        testRail.runs().close(run.getId()).execute();
+        //testRail.runs().close(run.getId()).execute();
 
     }
 }
