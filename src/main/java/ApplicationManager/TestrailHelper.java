@@ -120,18 +120,22 @@ public class TestrailHelper {
                 break;
         }
 
-        // Поля данных (статус, id, название и тд)
-        List<ResultField> customResultFields = testrailData.getTestRail().resultFields().list().execute();
+        if(testrailData.getTestRail() != null) {
+            // Поля данных (статус, id, название и тд)
+            List<ResultField> customResultFields = testrailData.getTestRail().resultFields().list().execute();
 
-        // Добавление результата
-        testrailData.getTestRail()
-                .results()
-                .addForCase(
-                        testrailData.getRun().getId(),
-                        case_id,
-                        new Result().setStatusId(status_id).setComment(comment),
-                        customResultFields)
-                .execute();
+            // Добавление результата
+            testrailData.getTestRail()
+                    .results()
+                    .addForCase(
+                            testrailData.getRun().getId(),
+                            case_id,
+                            new Result().setStatusId(status_id).setComment(comment),
+                            customResultFields)
+                    .execute();
+        } else {
+            System.out.println("\nTestRail not set. Skip set result.");
+        }
     }
 
     public void closeRun(){
