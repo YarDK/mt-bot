@@ -1,9 +1,9 @@
 package Requests;
 
 import ApplicationManager.MainApplication;
-import Jsons.JsonChannel;
-import Jsons.JsonGroupChat;
-import Jsons.JsonPersonalChat;
+import jsons.JsonChannel;
+import jsons.JsonGroupChat;
+import jsons.JsonPersonalChat;
 import Models.RegisterData;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

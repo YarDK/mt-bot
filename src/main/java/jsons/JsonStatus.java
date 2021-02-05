@@ -1,7 +1,6 @@
-package Jsons;
+package jsons;
 
 import com.google.gson.JsonObject;
-import org.openqa.selenium.json.Json;
 
 public class JsonStatus {
 

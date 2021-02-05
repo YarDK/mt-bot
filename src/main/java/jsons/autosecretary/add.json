@@ -1,0 +1,19 @@
+{
+  "rule": {
+    "actions": [
+      {
+        "action": "end_call",
+        "param": ""
+      }
+    ],
+    "active": true,
+    "direction": [
+      "incoming",
+      "internal"
+    ],
+    "melody_id": null,
+    "name": "Правило переадресации 2",
+    "notifications": [],
+    "wait_time": 0
+  }
+}

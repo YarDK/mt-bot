@@ -1,46 +1,11 @@
-package Jsons;
+package jsons;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-public class JsonContactAddPers {
+public class JsonContactUpdPers {
 
-    public String personalContactAdd(){
-        //{
-        //   "contactData":{
-        //      "firstName":"Ivan",
-        //      "lastName":"Ivanov",
-        //      "company":"5talk",
-        //      "position":"Developer",
-        //      "phones":[
-        //         {
-        //            "type":"mobile",
-        //            "phone":"+79601111111"
-        //         },
-        //         {
-        //            "type":"home",
-        //            "phone":" 79602222222"
-        //         }
-        //      ],
-        //      "emails":[
-        //         {
-        //            "type":"home",
-        //            "email":"1@yandex.ru"
-        //         },
-        //         {
-        //            "type":"work",
-        //            "email":"2@yandex.ru"
-        //         }
-        //      ],
-        //      "sipIds":[
-        //         "1@mango.com",
-        //         "2@mango.com"
-        //      ],
-        //      "url":"http://4talk.com",
-        //      "note":"NOTE NOTE"
-        //   },
-        //   "localId":"3b318389038f45519d973843a59fcd8e"
-        //}
+    public String personalContactUpdate(String id){
 
         JsonObject phone1_into = new JsonObject();
         phone1_into.addProperty("type","mobile");
@@ -71,8 +36,10 @@ public class JsonContactAddPers {
         sipIds_arr.add("2@mango.com");
 
         JsonObject contactData_into = new JsonObject();
-        contactData_into.addProperty("firstName","Test");
-        contactData_into.addProperty("lastName","Name" + System.currentTimeMillis());
+        contactData_into.addProperty("id",id); // надо вытаскивать id
+        contactData_into.addProperty("flags" , 0);
+        contactData_into.addProperty("firstName","Ivan");
+        contactData_into.addProperty("lastName","Test");
         contactData_into.addProperty("company","5talk");
         contactData_into.addProperty("position","Developer");
         contactData_into.add("phones", phones_arr);
@@ -86,4 +53,41 @@ public class JsonContactAddPers {
         main_json.addProperty("localId","3b318389038f45519d973843a59fcd8e");
         return main_json.toString();
     }
+
+    // {
+    //  "contactData": {
+    //    "id": "@id@",
+    //    "flags" : 0,
+    //    "firstName": "Ivan",
+    //    "lastName": "Ivanov",
+    //    "company": "5talk",
+    //    "position": "@position@",
+    //    "phones": [
+    //      {
+    //        "type": "mobile",
+    //        "phone": "+79601111111"
+    //      },
+    //      {
+    //        "type": "home",
+    //        "phone": " 79602222222"
+    //      }
+    //    ],
+    //    "emails": [
+    //      {
+    //        "type": "home",
+    //        "email": "1@yandex.ru"
+    //      },
+    //      {
+    //        "type": "work",
+    //        "email": "2@yandex.ru"
+    //      }
+    //    ],
+    //    "sipIds": [
+    //      "1@mango.com",
+    //      "2@mango.com"
+    //    ],
+    //    "url": "http://4talk.com",
+    //    "note": "NOTE NOTE"
+    //  }
+    //}
 }
