@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
+import jsons.channel.JsonChannel;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -41,6 +42,17 @@ public class TestJsonRead {
             e.printStackTrace();
         }
 
+    }
+
+    @Test
+    public void test2(){
+        JsonChannel jsonChannel = new JsonChannel();
+        System.out.println(jsonChannel.createChannel("local_id_number_example"));
+        System.out.println(jsonChannel.editChannel("account_example"));
+        System.out.println(jsonChannel.channelSetType("account_example"));
+        System.out.println(jsonChannel.addMembers("account_example", "members_example"));
+        System.out.println(jsonChannel.removeChanel("account_example"));
+        System.out.println(jsonChannel.messageSend("channel_id_example", "local_id_number_example"));
     }
 
 

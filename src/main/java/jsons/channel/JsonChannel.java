@@ -1,4 +1,4 @@
-package jsons;
+package jsons.channel;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

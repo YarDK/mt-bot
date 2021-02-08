@@ -1,4 +1,4 @@
-package jsons;
+package jsons.status;
 
 import com.google.gson.JsonObject;
 

@@ -1,8 +1,8 @@
 package Requests;
 
 import ApplicationManager.MainApplication;
-import jsons.JsonSaveSettings;
-import jsons.JsonStatus;
+import jsons.settings.JsonSaveSettings;
+import jsons.status.JsonStatus;
 import Models.RegisterData;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

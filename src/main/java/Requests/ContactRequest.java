@@ -1,12 +1,13 @@
 package Requests;
 
 import ApplicationManager.MainApplication;
-import jsons.*;
 import Models.RegisterData;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
+import jsons.contacts.addressbook.*;
+import jsons.contacts.personal.*;
 
 public class ContactRequest extends MainApplication {
 

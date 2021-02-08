@@ -1,7 +1,6 @@
 package Requests;
 
 import ApplicationManager.MainApplication;
-import jsons.JsonChannel;
 import Models.RegisterData;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

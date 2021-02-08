@@ -1,4 +1,4 @@
-package jsons;
+package jsons.contacts.addressbook;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
