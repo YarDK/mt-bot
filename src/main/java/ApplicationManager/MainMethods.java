@@ -3,7 +3,12 @@ package ApplicationManager;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,6 +40,18 @@ public class MainMethods {
             sid_list.add(j.getAsJsonObject().get("sid").getAsString());
         }
         return sid_list;
+    }
+
+    public String getJson(String file_path){
+
+        File json_file = new File(file_path);
+        try {
+            return JsonParser.parseReader(new JsonReader(new FileReader(json_file))).getAsJsonObject().toString();
+        } catch (FileNotFoundException e){
+            System.out.println("File '" + file_path + "' not found");
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

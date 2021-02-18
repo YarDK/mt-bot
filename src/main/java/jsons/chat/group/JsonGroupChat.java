@@ -1,4 +1,4 @@
-package Jsons;
+package jsons.chat.group;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

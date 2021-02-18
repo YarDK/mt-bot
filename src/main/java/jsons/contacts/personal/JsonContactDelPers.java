@@ -1,4 +1,4 @@
-package Jsons;
+package jsons.contacts.personal;
 
 import com.google.gson.JsonObject;
 

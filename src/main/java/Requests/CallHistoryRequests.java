@@ -1,7 +1,7 @@
 package Requests;
 
 import ApplicationManager.MainApplication;
-import Jsons.JsonCallHistory;
+import jsons.calls.JsonCalls;
 import Models.RegisterData;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -17,7 +17,7 @@ public class CallHistoryRequests extends MainApplication {
     }
 
     public JsonObject callsRecent(){
-        String json_calls_recent = new JsonCallHistory().jsonCallsRecent();
+        String json_calls_recent = getJson("src/main/java/jsons/calls/recent.json");
         System.out.println("\njson_calls_recent:\n" + json_calls_recent);
         String url = data.getUrl_4talk() + "/calls/recent";
         String calls_recent = RestAssured.given()
@@ -32,7 +32,7 @@ public class CallHistoryRequests extends MainApplication {
     }
 
     public JsonObject getRecordLink(String sid){
-        String json_calls_get_record = new JsonCallHistory().jsonCallsGetRecord(sid);
+        String json_calls_get_record = new JsonCalls().getRecord(sid);
         System.out.println("\njson_calls_get_record:\n" + json_calls_get_record);
         String url = data.getUrl_4talk() + "/calls/getRecordLink";
         String calls_get_record = RestAssured.given()

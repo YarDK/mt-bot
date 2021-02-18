@@ -13,9 +13,10 @@ public class MainApplication extends MainMethods{
     private ContactRequest contactRequest;
     private ProfileRequests profileRequests;
     private SessionsRequests sessionsRequests;
+    private Autosecretary autosecretary;
 
     public void init(String environment) {
-        System.out.println(String.format("ENVIRONMENT - Tests running on environment: %s\n",environment));
+        System.out.printf("ENVIRONMENT - Tests running on environment: %s\n%n",environment);
         registerData = new RegisterHelper().registerData(environment);
         sessionsRequests = new SessionsRequests(registerData);
         sessionsRequests.authorisation();
@@ -26,6 +27,7 @@ public class MainApplication extends MainMethods{
         chatRequests = new ChatRequests(registerData);
         contactRequest = new ContactRequest(registerData);
         profileRequests = new ProfileRequests(registerData);
+        autosecretary = new Autosecretary(registerData);
 
         testrailHelper = new TestrailHelper();
 
@@ -60,6 +62,10 @@ public class MainApplication extends MainMethods{
 
     public ProfileRequests profile(){
         return profileRequests;
+    }
+
+    public Autosecretary autosecretary(){
+        return autosecretary;
     }
 
 }
