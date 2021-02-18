@@ -87,32 +87,26 @@ public class SessionsRequests {
                 .get("lastSeen").getAsString());
 
         // По идеи не работает для карточки, где несколько номеров
-        data.withNumber_id(response_start_session
-                .getAsJsonObject("data")
-                .getAsJsonObject("user")
-                .getAsJsonObject("vcard")
-                .getAsJsonObject("mangoExtra")
-                .getAsJsonObject("telephony")
-                .getAsJsonArray("numbers").get(0).getAsJsonObject()
-                .get("number_id").getAsLong());
+        try {
+            JsonObject numbers = response_start_session
+                    .getAsJsonObject("data")
+                    .getAsJsonObject("user")
+                    .getAsJsonObject("vcard")
+                    .getAsJsonObject("mangoExtra")
+                    .getAsJsonObject("telephony")
+                    .getAsJsonArray("numbers").get(0).getAsJsonObject();
 
-        data.withNumber(response_start_session
-                .getAsJsonObject("data")
-                .getAsJsonObject("user")
-                .getAsJsonObject("vcard")
-                .getAsJsonObject("mangoExtra")
-                .getAsJsonObject("telephony")
-                .getAsJsonArray("numbers").get(0).getAsJsonObject()
-                .get("number").getAsString());
+            data.withNumber_id(numbers.get("number_id").getAsLong());
 
-        data.withProtocol(response_start_session
-                .getAsJsonObject("data")
-                .getAsJsonObject("user")
-                .getAsJsonObject("vcard")
-                .getAsJsonObject("mangoExtra")
-                .getAsJsonObject("telephony")
-                .getAsJsonArray("numbers").get(0).getAsJsonObject()
-                .get("protocol").getAsString());
+            data.withNumber(numbers.get("number").getAsString());
+
+            data.withProtocol(numbers.get("protocol").getAsString());
+
+        } catch (IndexOutOfBoundsException e){
+            System.out.println("!!! WARNING:");
+            e.printStackTrace();
+        }
+
     }
 
     // Регистрация учетки и получение хеша авторизации
