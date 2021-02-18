@@ -15,8 +15,8 @@ public class RMcreator {
     private static WebDriver wd;
 
     public static void main(String[] args) {
-        String old_url = "http://redmine.mango.local/issues/223787";
-        String new_url = "http://redmine.mango.local/issues/226038";
+        String old_url = "http://redmine.mango.local/issues/235177";
+        String new_url = "http://redmine.mango.local/issues/239671";
         init(old_url, new_url);
         stop();
     }
