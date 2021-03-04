@@ -60,6 +60,12 @@ public class JsonAutosecretary {
         return new JsonObject().toString();
     }
 
+    public String getFile(int file_id){
+            JsonObject get_file = new JsonObject();
+            get_file.addProperty("fileId",file_id);
+        return get_file.toString();
+    }
+
     public String del(int rule_id){
         JsonArray rules_arr = new JsonArray();
         rules_arr.add(rule_id);
@@ -69,5 +75,7 @@ public class JsonAutosecretary {
 
         return rules.toString();
     }
+
+
 
 }

@@ -1,4 +1,6 @@
 import Models.TestrailData;
+import com.google.gson.JsonObject;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class TestJustTest extends TestBase{
@@ -12,30 +14,12 @@ Case(id=1169021, title=второй кейс подсекции, sectionId=17421
      */
 
     @Test
-    public void testAnyTest1(){
-        int case_id = 1169024;
-        app.testrail().setResultCase(
-                case_id,
-                "Passed",
-                "Этот кейс успешный");
-    }
+    public void testTest1(){
+        int case_id = 0;
+        JsonObject response_product_get_melodies = app.autosecretary().getMelodies();
+        JsonObject response_product_get_groups = app.autosecretary().getGroups();
 
-    @Test
-    public void testAnyTest2(){
-        int case_id = 1187825;
-        app.testrail().setResultCase(
-                case_id,
-                "Failed",
-                "Этот кейс не успешный");
-    }
-
-    @Test
-    public void testAnyTest3(){
-        int case_id = 1169021;
-        app.testrail().setResultCase(
-                case_id,
-                "Retest",
-                "Этот кейс нужно пройти повторно");
+        System.out.println("++++++++\n" + response_product_get_groups + "\n+++++++++\n" + response_product_get_melodies);
     }
 
 }
