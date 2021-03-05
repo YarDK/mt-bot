@@ -31,33 +31,15 @@ public class CallHistoryRequests extends MainApplication {
     }
 
     public JsonObject callsRecent(){
-        String json_calls_recent = getJson("src/main/java/jsons/calls/recent.json");
-        System.out.println("\njson_calls_recent:\n" + json_calls_recent);
-        String url = data.getUrl_4talk() + "/calls/recent";
-        String calls_recent = RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(data.getAccount(), data.getHash())
-                .contentType(ContentType.JSON)
-                .body(json_calls_recent)
-                .post(url).asString();
-        System.out.println("\nResponse calls_recent:\n" + calls_recent);
-        return JsonParser.parseString(calls_recent).getAsJsonObject();
+        String json = getJson("src/main/java/jsons/calls/recent.json");
+        String url = "/calls/recent";
+        return method(json,url);
     }
 
     public JsonObject getRecordLink(String sid){
-        String json_calls_get_record = new JsonCalls().getRecord(sid);
-        System.out.println("\njson_calls_get_record:\n" + json_calls_get_record);
-        String url = data.getUrl_4talk() + "/calls/getRecordLink";
-        String calls_get_record = RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(data.getAccount(), data.getHash())
-                .contentType(ContentType.JSON)
-                .body(json_calls_get_record)
-                .post(url).asString();
-        System.out.println("\nResponse calls_get_record:\n" + calls_get_record);
-        return JsonParser.parseString(calls_get_record).getAsJsonObject();
+        String json = new JsonCalls().getRecord(sid);
+        String url = "/calls/getRecordLink";
+        return method(json,url);
     }
 
     public JsonObject checkRecord(String url){
@@ -67,102 +49,76 @@ public class CallHistoryRequests extends MainApplication {
     }
 
     public JsonObject callsHistory(String number){
-        String json_calls_history = new JsonCalls().callsHistory(number);
-        System.out.println("\njson_calls_history:\n" + json_calls_history);
-        String url = data.getUrl_4talk() + "/calls/history";
-        String calls_history = RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(data.getAccount(), data.getHash())
-                .contentType(ContentType.JSON)
-                .body(json_calls_history)
-                .post(url).asString();
-        System.out.println("\nResponse calls_history:\n" + calls_history);
-        return JsonParser.parseString(calls_history).getAsJsonObject();
+        String json = new JsonCalls().callsHistory(number);
+        String url = "/calls/history";
+        return method(json,url);
     }
 
     public JsonObject callsHistory_ref(String number){
-        System.out.println("ВОТ ТУТ РЕФАКТОРИНГ!!!!!\n");
         String json = new JsonCalls().callsHistory(number);
         String url = "/calls/history";
         return method(json,url);
     }
 
     public JsonObject callsNotifyAnswered(String callId, String contextId){
-        String json_calls_notify_answered = new JsonCalls().callsNotifyAnswered(callId,contextId);
-        System.out.println("\njson_calls_notify_answered:\n" + json_calls_notify_answered);
-        String url = data.getUrl_4talk() + "/calls/notifyAnswered";
-        String calls_notify_answered = RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(data.getAccount(), data.getHash())
-                .contentType(ContentType.JSON)
-                .body(json_calls_notify_answered)
-                .post(url).asString();
-        System.out.println("\nResponse calls_notify_answered:\n" + calls_notify_answered);
-        return JsonParser.parseString(calls_notify_answered).getAsJsonObject();
+        String json = new JsonCalls().callsNotifyAnswered(callId,contextId);
+        String url = "/calls/notifyAnswered";
+        return method(json,url);
     }
 
     public JsonObject callsNotifyStarted(String contextId){
-        String json_calls_notify_started = new JsonCalls().callsNotifyStarted(contextId);
-        System.out.println("\njson_calls_notify_started:\n" + json_calls_notify_started);
-        String url = data.getUrl_4talk() + "/calls/notifyStarted ";
-        String calls_notify_starte = RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(data.getAccount(), data.getHash())
-                .contentType(ContentType.JSON)
-                .body(json_calls_notify_started)
-                .post(url).asString();
-        System.out.println("\nResponse calls_notify_starte:\n" + calls_notify_starte);
-        return JsonParser.parseString(calls_notify_starte).getAsJsonObject();
+        String json = new JsonCalls().callsNotifyStarted(contextId);
+        String url = "/calls/notifyStarted ";
+        return method(json,url);
     }
 
     public JsonObject callsSearch(String query){
-        String json_calls_search = new JsonCalls().callsSearch(query);
-        System.out.println("\njson_calls_search:\n" + json_calls_search);
-        String url = data.getUrl_4talk() + "/calls/search";
-        String calls_search = RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(data.getAccount(), data.getHash())
-                .contentType(ContentType.JSON)
-                .body(json_calls_search)
-                .post(url).asString();
-        System.out.println("\nResponse calls_search:\n" + calls_search);
-        return JsonParser.parseString(calls_search).getAsJsonObject();
+        String json = new JsonCalls().callsSearch(query);
+        String url = "/calls/search";
+        return method(json,url);
     }
 
     public JsonObject callsSync(){
-        String json_calls_sync = new JsonCalls().callsSync();
-        System.out.println("\njson_calls_sync:\n" + json_calls_sync);
-        String url = data.getUrl_4talk() + "/calls/sync";
-        String calls_sync = RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(data.getAccount(), data.getHash())
-                .contentType(ContentType.JSON)
-                .body(json_calls_sync)
-                .post(url).asString();
-        System.out.println("\nResponse calls_sync:\n" + calls_sync);
-        return JsonParser.parseString(calls_sync).getAsJsonObject();
+        String json = new JsonCalls().callsSync();
+        String url = "/calls/sync";
+        return method(json,url);
     }
 
     public JsonObject callsGet(){
-        String json_calls_get = new JsonCalls().callsGet();
-        System.out.println("\njson_calls_get:\n" + json_calls_get);
-        String url = data.getUrl_4talk() + "/calls/get";
-        String calls_get = RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(data.getAccount(), data.getHash())
-                .contentType(ContentType.JSON)
-                .body(json_calls_get)
-                .post(url).asString();
-        System.out.println("\nResponse calls_get:\n" + calls_get);
-        return JsonParser.parseString(calls_get).getAsJsonObject();
+        String json = new JsonCalls().callsGet();
+        String url = "/calls/get";
+        return method(json,url);
     }
 
+    public JsonObject callsRemove(String sid){
+        String json = new JsonCalls().callsRemove(sid);
+        String url = "/calls/remove";
+        return method(json,url);
+    }
+
+    public JsonObject callsRemoveAll(String sid){
+        String json = new JsonCalls().callsRemoveAll(sid);
+        String url = "/calls/removeAll";
+        return method(json,url);
+    }
+
+    public JsonObject callsResetMissedCount(String sid){
+        String json = new JsonCalls().callsResetMissedCount(sid);
+        String url = "/calls/resetMissedCount";
+        return method(json,url);
+    }
+
+    public JsonObject callsSetOutgoingLine(String account, String outgoingline){
+        String json = new JsonCalls().callsSetOutgoingLine(account,outgoingline);
+        String url = "/calls/setOutgoingLine";
+        return method(json,url);
+    }
+
+    public JsonObject callsNotesSave(String sid){
+        String json = new JsonCalls().callsNotesSave(sid);
+        String url = "/calls/notes/save";
+        return method(json,url);
+    }
 
 
 

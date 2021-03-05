@@ -169,21 +169,101 @@ public class CallHistoryTests extends TestBase {
         }
     }
 
-    @Test
-    public void testCallsGet(){
+    @Test(enabled = false)
+    public void testCallsRemove(){
         int case_id = 0;
+        // Добавить sid звонка, надо как-то автоматизировать
+        String sid = "";
 
-        JsonObject response_calls_get= app.callHistory().callsGet();
-        int status_cod = response_calls_get.get("statusCode").getAsInt();
+        int status_cod = app.callHistory().callsRemove(sid).get("statusCode").getAsInt();
 
         if(status_cod == 200){
-            app.testrail().setResultCase(case_id, "passed", "Дозагрузка из журнала звонков выполнена успешно.");
+            app.testrail().setResultCase(case_id, "passed", "Звонок успешно удален");
+        } else {
+            Assert.fail("CallsRemove failed, result not 200");
+            app.testrail().setResultCase(
+                    case_id,
+                    "failed",
+                    "Звонок не удалось удалить. Код ответа " + status_cod
+            );
+        }
+    }
+
+    @Test(enabled = false)
+    public void testCallsRemoveAll(){
+        int case_id = 0;
+        // Добавить sid звонка, до которого надо удалить все записи
+        String sid = "";
+
+        int status_cod = app.callHistory().callsRemoveAll(sid).get("statusCode").getAsInt();
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "Звоноки успешно удалены");
+        } else {
+            Assert.fail("CallsRemoveAll failed, result not 200");
+            app.testrail().setResultCase(
+                    case_id,
+                    "failed",
+                    "Звоноки не удалось удалить. Код ответа " + status_cod
+            );
+        }
+    }
+
+    @Test
+    public void callsResetMissedCount(){
+        int case_id = 0;
+        // Добавить sid звонка, надо как-то автоматизировать
+        String sid = "417519551034404480";
+
+        int status_cod = app.callHistory().callsResetMissedCount(sid).get("statusCode").getAsInt();
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "Счетчик пропущенных вызовов сброшен успешно.");
+        } else {
+            Assert.fail("Reset Missed Count failed, result not 200");
+            app.testrail().setResultCase(
+                    case_id,
+                    "failed",
+                    "Счетчик сбросить не удалось. Код ответа " + status_cod
+            );
+        }
+    }
+
+    @Test
+    public void testCallsSetOutgoingLine(){
+        int case_id = 0;
+        String account = app.data().getAccount();
+        String outgoingline = "74951203279";
+
+        int status_cod = app.callHistory().callsSetOutgoingLine(account, outgoingline).get("statusCode").getAsInt();
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "Номер '"+outgoingline+"' успешно установлен для аккаунт "+account);
+        } else {
+            Assert.fail("Calls Set Outgoing Line failed, result not 200");
+            app.testrail().setResultCase(
+                    case_id,
+                    "failed",
+                    "Не удалось установить номер исходящей связи. Код ответа " + status_cod
+            );
+        }
+    }
+
+    @Test(enabled = false)
+    public void testCallsNotesSave(){
+        int case_id = 0;
+        String sid = "417519551034404480";
+
+        int status_cod = app.callHistory().callsNotesSave(sid).get("statusCode").getAsInt();
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "Заметка для звонка успешно установлена.");
         } else {
             Assert.fail("CallsGet failed, result not 200");
             app.testrail().setResultCase(
                     case_id,
                     "failed",
-                    "Дозагрузка из журнала звонков выполнена не кспешно с кодом " + status_cod
+                    "Заметка для звонка не установлена. Код ответа " + status_cod
             );
         }
     }

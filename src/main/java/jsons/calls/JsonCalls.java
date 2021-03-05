@@ -63,5 +63,42 @@ public class JsonCalls {
         return calls_sync.toString();
     }
 
+    public String callsRemove(String sid){
+        JsonObject calls_remove = new JsonObject();
+        calls_remove.addProperty("sid", sid);
+        return calls_remove.toString();
+    }
+
+    // До какого sid будут удалены записи
+    public String callsRemoveAll(String toid){
+        JsonObject calls_remove_all = new JsonObject();
+        calls_remove_all.addProperty("toId", toid);
+        return calls_remove_all.toString();
+    }
+
+    public String callsResetMissedCount(String sid){
+        JsonObject calls_reset_missed_count = new JsonObject();
+        // SID последнего пропущенного звонка
+        calls_reset_missed_count.addProperty("sid", sid);
+        return calls_reset_missed_count.toString();
+    }
+
+    public String callsSetOutgoingLine(String account, String outgoingline){
+        JsonObject calls_set_outgoing_line = new JsonObject();
+        //account: string - аккаунт сотрудника, номер которого нужно изменить
+        //outgoingline: string - для удаления текущего исходящего номера необходимо передать пустую строку
+
+        calls_set_outgoing_line.addProperty("account",account);
+        calls_set_outgoing_line.addProperty("outgoingline", outgoingline);
+        return calls_set_outgoing_line.toString();
+    }
+
+    public String callsNotesSave(String sid){
+        JsonObject calls_notes_save = new JsonObject();
+        calls_notes_save.addProperty("sid",sid);
+        calls_notes_save.addProperty("text","Anything text for call with sid "+sid);
+        return calls_notes_save.toString();
+    }
+
 
 }
