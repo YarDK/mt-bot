@@ -1,9 +1,8 @@
-import Models.TestrailData;
 import com.google.gson.JsonObject;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TestJustTest extends TestBase{
+public class TestJustTest extends TestBase {
+
 
     /*
 
@@ -14,12 +13,14 @@ Case(id=1169021, title=второй кейс подсекции, sectionId=17421
      */
 
     @Test
-    public void testTest1(){
+    public void testTest1() {
         int case_id = 0;
         JsonObject response_product_get_melodies = app.autosecretary().getMelodies();
         JsonObject response_product_get_groups = app.autosecretary().getGroups();
 
         System.out.println("++++++++\n" + response_product_get_groups + "\n+++++++++\n" + response_product_get_melodies);
     }
+
+
 
 }

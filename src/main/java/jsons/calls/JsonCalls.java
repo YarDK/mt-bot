@@ -36,5 +36,32 @@ public class JsonCalls {
         return calls_notify_started.toString();
     }
 
+    public String callsSearch(String query){
+            JsonObject calls_search = new JsonObject();
+            calls_search.addProperty("limit", 100);
+            calls_search.addProperty("onlyMissed", false);
+            calls_search.addProperty("query", query);
+            // toId: String, опциональный - Диапазон выборки SID ∈ (toId..0), в обратном хронологическом порядке.
+            // Если не указано, выборка начинается с конца истории
+            //calls_search.addProperty("toId", "417518919190127421");
+        return calls_search.toString();
+    }
+
+    // Синхронизация журнала звонков
+    public String callsSync(){
+        JsonObject calls_sync = new JsonObject();
+        calls_sync.addProperty("limit", 500);
+        calls_sync.addProperty("sinceId","317519551034404480");
+        return calls_sync.toString();
+    }
+
+    // Дозагрузка из журнала звонков
+    public String callsGet(){
+        JsonObject calls_sync = new JsonObject();
+        calls_sync.addProperty("limit", 100);
+        calls_sync.addProperty("toId","317519551034404480");
+        return calls_sync.toString();
+    }
+
 
 }

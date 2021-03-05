@@ -63,6 +63,26 @@ public class CallHistoryTests extends TestBase {
     }
 
     @Test
+    public void testCallsHistory_ref(){
+        int case_id = 0;
+
+        String number = "74955404444";
+        JsonObject response_calls_history = app.callHistory().callsHistory_ref(number);
+        int status_cod = response_calls_history.get("statusCode").getAsInt();
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "История звонокв по номеру " + number + " получена успешно");
+        } else {
+            Assert.fail("Calls history for number '"+number+"' not getting, result not 200");
+            app.testrail().setResultCase(
+                    case_id,
+                    "failed",
+                    "История звонокв по номеру " + number + " не получена.\nКод ответа " + status_cod
+            );
+        }
+    }
+
+    @Test
     public void testCallsNotifyAnswered(){
         int case_id = 0;
 
@@ -107,4 +127,66 @@ public class CallHistoryTests extends TestBase {
             );
         }
     }
+
+    @Test
+    public void testCallsSearch(){
+        int case_id = 0;
+
+        // Придумать откуда брать данные о звонке, сейча берутся статичные данные конткрентого звонка:
+        String query = "test";
+
+        JsonObject response_calls_search = app.callHistory().callsSearch(query);
+        int status_cod = response_calls_search.get("statusCode").getAsInt();
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "Поиск по '"+query+"' выполнен успешно.");
+        } else {
+            Assert.fail("Search query failed, result not 200");
+            app.testrail().setResultCase(
+                    case_id,
+                    "failed",
+                    "Поиск по '"+query+"' выполнен не успешно. Код ответа " + status_cod
+            );
+        }
+    }
+
+    @Test
+    public void testCallsSync(){
+        int case_id = 0;
+
+        JsonObject response_calls_sync= app.callHistory().callsSync();
+        int status_cod = response_calls_sync.get("statusCode").getAsInt();
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "Синхронизация журнала звонков выполнена успешно.");
+        } else {
+            Assert.fail("CallsSync failed, result not 200");
+            app.testrail().setResultCase(
+                    case_id,
+                    "failed",
+                    "Синхронизация журнала звонков выполнена не кспешно с кодом " + status_cod
+            );
+        }
+    }
+
+    @Test
+    public void testCallsGet(){
+        int case_id = 0;
+
+        JsonObject response_calls_get= app.callHistory().callsGet();
+        int status_cod = response_calls_get.get("statusCode").getAsInt();
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "Дозагрузка из журнала звонков выполнена успешно.");
+        } else {
+            Assert.fail("CallsGet failed, result not 200");
+            app.testrail().setResultCase(
+                    case_id,
+                    "failed",
+                    "Дозагрузка из журнала звонков выполнена не кспешно с кодом " + status_cod
+            );
+        }
+    }
+
+
 }

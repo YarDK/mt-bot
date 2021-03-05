@@ -16,6 +16,20 @@ public class CallHistoryRequests extends MainApplication {
         this.data = data;
     }
 
+    public JsonObject method(String json, String url){
+        System.out.println("\nJson for "+url+":\n" + json);
+
+        String post_request = RestAssured.given()
+                .auth()
+                .preemptive()
+                .basic(data.getAccount(), data.getHash())
+                .contentType(ContentType.JSON)
+                .body(json)
+                .post(data.getUrl_4talk() + url).asString();
+        System.out.println("\nResponse for "+url+":\n" + post_request);
+        return JsonParser.parseString(post_request).getAsJsonObject();
+    }
+
     public JsonObject callsRecent(){
         String json_calls_recent = getJson("src/main/java/jsons/calls/recent.json");
         System.out.println("\njson_calls_recent:\n" + json_calls_recent);
@@ -67,6 +81,13 @@ public class CallHistoryRequests extends MainApplication {
         return JsonParser.parseString(calls_history).getAsJsonObject();
     }
 
+    public JsonObject callsHistory_ref(String number){
+        System.out.println("ВОТ ТУТ РЕФАКТОРИНГ!!!!!\n");
+        String json = new JsonCalls().callsHistory(number);
+        String url = "/calls/history";
+        return method(json,url);
+    }
+
     public JsonObject callsNotifyAnswered(String callId, String contextId){
         String json_calls_notify_answered = new JsonCalls().callsNotifyAnswered(callId,contextId);
         System.out.println("\njson_calls_notify_answered:\n" + json_calls_notify_answered);
@@ -81,7 +102,7 @@ public class CallHistoryRequests extends MainApplication {
         System.out.println("\nResponse calls_notify_answered:\n" + calls_notify_answered);
         return JsonParser.parseString(calls_notify_answered).getAsJsonObject();
     }
-    
+
     public JsonObject callsNotifyStarted(String contextId){
         String json_calls_notify_started = new JsonCalls().callsNotifyStarted(contextId);
         System.out.println("\njson_calls_notify_started:\n" + json_calls_notify_started);
@@ -96,6 +117,53 @@ public class CallHistoryRequests extends MainApplication {
         System.out.println("\nResponse calls_notify_starte:\n" + calls_notify_starte);
         return JsonParser.parseString(calls_notify_starte).getAsJsonObject();
     }
+
+    public JsonObject callsSearch(String query){
+        String json_calls_search = new JsonCalls().callsSearch(query);
+        System.out.println("\njson_calls_search:\n" + json_calls_search);
+        String url = data.getUrl_4talk() + "/calls/search";
+        String calls_search = RestAssured.given()
+                .auth()
+                .preemptive()
+                .basic(data.getAccount(), data.getHash())
+                .contentType(ContentType.JSON)
+                .body(json_calls_search)
+                .post(url).asString();
+        System.out.println("\nResponse calls_search:\n" + calls_search);
+        return JsonParser.parseString(calls_search).getAsJsonObject();
+    }
+
+    public JsonObject callsSync(){
+        String json_calls_sync = new JsonCalls().callsSync();
+        System.out.println("\njson_calls_sync:\n" + json_calls_sync);
+        String url = data.getUrl_4talk() + "/calls/sync";
+        String calls_sync = RestAssured.given()
+                .auth()
+                .preemptive()
+                .basic(data.getAccount(), data.getHash())
+                .contentType(ContentType.JSON)
+                .body(json_calls_sync)
+                .post(url).asString();
+        System.out.println("\nResponse calls_sync:\n" + calls_sync);
+        return JsonParser.parseString(calls_sync).getAsJsonObject();
+    }
+
+    public JsonObject callsGet(){
+        String json_calls_get = new JsonCalls().callsGet();
+        System.out.println("\njson_calls_get:\n" + json_calls_get);
+        String url = data.getUrl_4talk() + "/calls/get";
+        String calls_get = RestAssured.given()
+                .auth()
+                .preemptive()
+                .basic(data.getAccount(), data.getHash())
+                .contentType(ContentType.JSON)
+                .body(json_calls_get)
+                .post(url).asString();
+        System.out.println("\nResponse calls_get:\n" + calls_get);
+        return JsonParser.parseString(calls_get).getAsJsonObject();
+    }
+
+
 
 
 }

@@ -15,6 +15,7 @@ public class MainApplication extends MainMethods{
     private SessionsRequests sessionsRequests;
     private Autosecretary autosecretary;
 
+
     public void init(String environment) {
         System.out.printf("ENVIRONMENT - Tests running on environment: %s\n%n",environment);
         registerData = new RegisterHelper().registerData(environment);
@@ -22,6 +23,7 @@ public class MainApplication extends MainMethods{
         sessionsRequests.authorisation();
         sessionsRequests.registration();
         sessionsRequests.startSession();
+
 
         callHistoryRequests = new CallHistoryRequests(registerData);
         chatRequests = new ChatRequests(registerData);
@@ -43,6 +45,8 @@ public class MainApplication extends MainMethods{
     }
 
     public TestrailHelper testrail(){return testrailHelper;}
+
+
 
     public SessionsRequests session(){
         return sessionsRequests;
