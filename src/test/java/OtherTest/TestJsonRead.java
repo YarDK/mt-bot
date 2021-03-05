@@ -6,13 +6,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import jsons.channel.JsonChannel;
-import org.openqa.selenium.json.Json;
 import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-
 
 public class TestJsonRead {
 
@@ -59,18 +57,19 @@ public class TestJsonRead {
 
     @Test
     public void test3() {
-        System.out.println(del(0));
+        String number = "4001";
+        JsonObject calls_history = new JsonObject();
+        calls_history.addProperty("limit", 50);
+
+        JsonArray numbers_arr = new JsonArray();
+        numbers_arr.add(number);
+
+        calls_history.add("numbers", numbers_arr);
+
+        System.out.println(calls_history);
+
     }
 
-    public String del(int rule_id){
-        JsonArray rules_arr = new JsonArray();
-        rules_arr.add(rule_id);
-
-        JsonObject rules = new JsonObject();
-        rules.add("rules", rules_arr);
-
-        return rules.toString();
-    }
 
 
 }

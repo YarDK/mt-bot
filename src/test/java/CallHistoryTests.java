@@ -41,4 +41,70 @@ public class CallHistoryTests extends TestBase {
             //Assert.assertEquals(response_get_record.get("statusCode").getAsInt(),200,failed_message);
         }
     }
+
+    @Test
+    public void testCallsHistory(){
+        int case_id = 0;
+
+        String number = "74955404444";
+        JsonObject response_calls_history = app.callHistory().callsHistory(number);
+        int status_cod = response_calls_history.get("statusCode").getAsInt();
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "История звонокв по номеру " + number + " получена успешно");
+        } else {
+            Assert.fail("Calls history for number '"+number+"' not getting, result not 200");
+            app.testrail().setResultCase(
+                    case_id,
+                    "failed",
+                    "История звонокв по номеру " + number + " не получена.\nКод ответа " + status_cod
+            );
+        }
+    }
+
+    @Test
+    public void testCallsNotifyAnswered(){
+        int case_id = 0;
+
+        // Придумать откуда брать данные о звонке, сейча берутся статичные данные конткрентого звонка:
+        String callId = "534344147";
+        String contextId = "11136795356";
+
+        JsonObject response_calls_notify_answered = app.callHistory().callsNotifyAnswered(callId,contextId);
+        int status_cod = response_calls_notify_answered.get("statusCode").getAsInt();
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "Уведомление об ответе на звонок отправлено успешно");
+        } else {
+            Assert.fail("Сalls notify answered not send, result not 200");
+            app.testrail().setResultCase(
+                    case_id,
+                    "failed",
+                    "Уведомление об ответе на звонок отправлено не успешно, код ответа " + status_cod
+            );
+        }
+    }
+
+
+    @Test
+    public void testCallsNotifyStarted(){
+        int case_id = 0;
+
+        // Придумать откуда брать данные о звонке, сейча берутся статичные данные конткрентого звонка:
+        String contextId = "11136781099";
+
+        JsonObject response_calls_notify_started = app.callHistory().callsNotifyStarted(contextId);
+        int status_cod = response_calls_notify_started.get("statusCode").getAsInt();
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "Уведомление о начале звонка отправлено успешно");
+        } else {
+            Assert.fail("Сalls notify started not send, result not 200");
+            app.testrail().setResultCase(
+                    case_id,
+                    "failed",
+                    "Уведомление о начале звонка отправлено не успешно, код ответа " + status_cod
+            );
+        }
+    }
 }
