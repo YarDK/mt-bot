@@ -1,10 +1,13 @@
 package ApplicationManager;
 
+import Models.RegisterData;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.http.ContentType;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -52,6 +55,20 @@ public class MainMethods {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public JsonObject post_response(String json, String url, RegisterData data){
+        System.out.println("\nJson for "+url+":\n" + json);
+
+        String post_request = RestAssured.given()
+                .auth()
+                .preemptive()
+                .basic(data.getAccount(), data.getHash())
+                .contentType(ContentType.JSON)
+                .body(json)
+                .post(data.getUrl_4talk() + url).asString();
+        System.out.println("\nResponse for "+url+":\n" + post_request);
+        return JsonParser.parseString(post_request).getAsJsonObject();
     }
 
 

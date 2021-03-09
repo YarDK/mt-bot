@@ -6,7 +6,6 @@ import Models.RegisterData;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.http.ContentType;
 
 public class CallHistoryRequests extends MainApplication {
 
@@ -16,30 +15,17 @@ public class CallHistoryRequests extends MainApplication {
         this.data = data;
     }
 
-    public JsonObject method(String json, String url){
-        System.out.println("\nJson for "+url+":\n" + json);
-
-        String post_request = RestAssured.given()
-                .auth()
-                .preemptive()
-                .basic(data.getAccount(), data.getHash())
-                .contentType(ContentType.JSON)
-                .body(json)
-                .post(data.getUrl_4talk() + url).asString();
-        System.out.println("\nResponse for "+url+":\n" + post_request);
-        return JsonParser.parseString(post_request).getAsJsonObject();
-    }
 
     public JsonObject callsRecent(){
         String json = getJson("src/main/java/jsons/calls/recent.json");
         String url = "/calls/recent";
-        return method(json,url);
+        return post_response(json,url,data);
     }
 
     public JsonObject getRecordLink(String sid){
         String json = new JsonCalls().getRecord(sid);
         String url = "/calls/getRecordLink";
-        return method(json,url);
+        return post_response(json,url,data);
     }
 
     public JsonObject checkRecord(String url){
@@ -51,75 +37,72 @@ public class CallHistoryRequests extends MainApplication {
     public JsonObject callsHistory(String number){
         String json = new JsonCalls().callsHistory(number);
         String url = "/calls/history";
-        return method(json,url);
+        return post_response(json,url,data);
     }
 
     public JsonObject callsHistory_ref(String number){
         String json = new JsonCalls().callsHistory(number);
         String url = "/calls/history";
-        return method(json,url);
+        return post_response(json,url,data);
     }
 
     public JsonObject callsNotifyAnswered(String callId, String contextId){
         String json = new JsonCalls().callsNotifyAnswered(callId,contextId);
         String url = "/calls/notifyAnswered";
-        return method(json,url);
+        return post_response(json,url,data);
     }
 
     public JsonObject callsNotifyStarted(String contextId){
         String json = new JsonCalls().callsNotifyStarted(contextId);
         String url = "/calls/notifyStarted ";
-        return method(json,url);
+        return post_response(json,url,data);
     }
 
     public JsonObject callsSearch(String query){
         String json = new JsonCalls().callsSearch(query);
         String url = "/calls/search";
-        return method(json,url);
+        return post_response(json,url,data);
     }
 
     public JsonObject callsSync(){
         String json = new JsonCalls().callsSync();
         String url = "/calls/sync";
-        return method(json,url);
+        return post_response(json,url,data);
     }
 
     public JsonObject callsGet(){
         String json = new JsonCalls().callsGet();
         String url = "/calls/get";
-        return method(json,url);
+        return post_response(json,url,data);
     }
 
     public JsonObject callsRemove(String sid){
         String json = new JsonCalls().callsRemove(sid);
         String url = "/calls/remove";
-        return method(json,url);
+        return post_response(json,url,data);
     }
 
     public JsonObject callsRemoveAll(String sid){
         String json = new JsonCalls().callsRemoveAll(sid);
         String url = "/calls/removeAll";
-        return method(json,url);
+        return post_response(json,url,data);
     }
 
     public JsonObject callsResetMissedCount(String sid){
         String json = new JsonCalls().callsResetMissedCount(sid);
         String url = "/calls/resetMissedCount";
-        return method(json,url);
+        return post_response(json,url,data);
     }
 
     public JsonObject callsSetOutgoingLine(String account, String outgoingline){
         String json = new JsonCalls().callsSetOutgoingLine(account,outgoingline);
         String url = "/calls/setOutgoingLine";
-        return method(json,url);
+        return post_response(json,url,data);
     }
 
     public JsonObject callsNotesSave(String sid){
         String json = new JsonCalls().callsNotesSave(sid);
         String url = "/calls/notes/save";
-        return method(json,url);
+        return post_response(json,url,data);
     }
-
-
-
 }

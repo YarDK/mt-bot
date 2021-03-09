@@ -50,4 +50,16 @@ public class JsonGroupChat {
         main_json.addProperty("account", account);
         return main_json.toString();
     }
+
+    public String chatAvatarRemove(String account){
+        JsonObject chat_avatat_remove = new JsonObject();
+        chat_avatat_remove.addProperty("account", account);
+        return chat_avatat_remove.toString();
+    }
+
+    public String chatAvatarUpload(String account){
+        JsonObject chat_avatar_upload = new JsonObject();
+        chat_avatar_upload.addProperty("account", account);
+        return chat_avatar_upload.toString();
+    }
 }

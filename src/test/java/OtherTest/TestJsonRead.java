@@ -5,12 +5,18 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.builder.MultiPartSpecBuilder;
+import com.jayway.restassured.http.ContentType;
+import com.jayway.restassured.response.Response;
 import jsons.channel.JsonChannel;
 import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+
+import static com.jayway.restassured.RestAssured.given;
 
 public class TestJsonRead {
 
@@ -57,18 +63,84 @@ public class TestJsonRead {
 
     @Test
     public void test3() {
-        String number = "4001";
-        JsonObject calls_history = new JsonObject();
-        calls_history.addProperty("limit", 50);
+        JsonObject message_history = new JsonObject();
+        message_history.addProperty("latest", 1);
+        message_history.addProperty("limit", 100);
 
-        JsonArray numbers_arr = new JsonArray();
-        numbers_arr.add(number);
 
-        calls_history.add("numbers", numbers_arr);
+        JsonArray talkers_arr = new JsonArray();
+        JsonObject talkers = new JsonObject();
+        talkers.addProperty("account", "401530378@mtalker.mangotele.com");
+        talkers_arr.add(talkers);
 
-        System.out.println(calls_history);
+        message_history.add("talkers", talkers_arr);
+        message_history.addProperty("toId", "304959329615186528");
+
+        System.out.println(message_history);
 
     }
+
+
+
+    // КАК ФАЙЛЫ ГРУЗИТЬ!!!!!!!
+    @Test
+    public void test6(){
+        String resourceFile = "src/test/resources";
+        String filename = "testavatar.png";
+
+        String file_path = "src/test/resources/testavatar.png";
+        File file_avatar = new File(file_path);
+
+        String url = "https://chatapi.mango-office.ru/chat/uploadAvatar";
+        String account = "400613768@mtalker.mangotele.com";
+        String hash = "180df21b1f0a4dcdd41a169c7b11b4f1";
+
+        String post_request = RestAssured.given()
+                .multiPart(new MultiPartSpecBuilder(file_avatar)
+                        .controlName("userfile")
+                        .fileName(filename)
+                        .mimeType("image/png")
+                        .build())
+                .auth()
+                .preemptive()
+                .basic(account, hash)
+                .param("account", "{21dfcc12-503d-4d2b-b316-ec0b72022ff0}@conference.mtalker.mangotele.com")
+                .param("userfile", filename)
+                .post(url).asString();
+
+        System.out.println(post_request);
+    }
+
+    //given().
+    //         multiPart("file1", new File("/home/johan/some_large_file.bin")).
+    //         multiPart("file2", new File("/home/johan/some_other_large_file.bin")).
+    //         multiPart("file3", "file_name.bin", inputStream).
+    //         formParam("name", "value").
+    //expect().
+    //         body("fileUploadResult", is("OK")).
+    //when().
+    //         post("/advancedFileUpload");
+
+
+    //POST https://chatapi.mango-office.ru/chat/uploadAvatar HTTP/1.1
+    //Host: chatapi.mango-office.ru
+    //User-Agent: M.TALKER/3.10.0/c83b0093b75a0201b95bf78c66692348
+    //X-Api-Version: 2
+    //Authorization: Basic NDAwNjEzNzY4QG10YWxrZXIubWFuZ290ZWxlLmNvbToxODBkZjIxYjFmMGE0ZGNkZDQxYTE2OWM3YjExYjRmMQ==
+    //Content-Type: multipart/form-data; boundary="boundary_.oOo._C6fWqlnJ7NYnSNBbfjGtfwptmX6N1zCy"
+    //MIME-Version: 1.0
+    //Content-Length: 2847468
+    //Connection: Keep-Alive
+    //Accept-Encoding: gzip, deflate
+    //Accept-Language: ru-RU,en,*
+    //
+    //--boundary_.oOo._C6fWqlnJ7NYnSNBbfjGtfwptmX6N1zCy
+    //Content-Disposition: form-data; name="account"
+    //
+    //{21dfcc12-503d-4d2b-b316-ec0b72022ff0}@conference.mtalker.mangotele.com
+    //--boundary_.oOo._C6fWqlnJ7NYnSNBbfjGtfwptmX6N1zCy
+    //Content-Disposition: form-data; name="userfile"; filename="IMG_5855.JPG"
+    //Content-Type: image/jpeg
 
 
 
