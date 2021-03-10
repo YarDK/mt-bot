@@ -150,6 +150,7 @@ public class ChatRequests extends MainApplication {
         File file_avatar = new File(resources + file_name);
         String url = "/chat/uploadAvatar";
 
+        System.out.println("\nRequest: "+url+":\n");
         // Отправка файла на сервер
         String post_request = RestAssured.given()
                 .multiPart(new MultiPartSpecBuilder(file_avatar)
@@ -162,7 +163,7 @@ public class ChatRequests extends MainApplication {
                 .basic(data.getAccount(), data.getHash())
                 .param("account", account)
                 .post(data.getUrl_4talk() + url).asString();
-
+        System.out.println("Response UploadAvatar:\n" + post_request);
         return JsonParser.parseString(post_request).getAsJsonObject();
     }
 }

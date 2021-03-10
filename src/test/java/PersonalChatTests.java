@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 public class PersonalChatTests extends TestBase {
 
-    private String account = "401809841@mtalker.mangotele.com";
+    private final String account = "401809841@mtalker.mangotele.com";
     private final String local_id = "abcdef0123456789abc" + System.currentTimeMillis();
 
     @Test
@@ -84,7 +84,6 @@ public class PersonalChatTests extends TestBase {
     @Test(enabled = false)
     public void testMessageNotifyRead(){
         int case_id = 0;
-        String account = "";
 
         int status_cod = app.chat().messageNotifyRead(account).get("statusCode").getAsInt();
 
@@ -111,13 +110,15 @@ public class PersonalChatTests extends TestBase {
         if(status_cod == 200){
             app.testrail().setResultCase(case_id, "passed", "Аватар успешно установлен");
         } else {
-            Assert.fail("MessageNotifyRead failed, result not 200");
+            Assert.fail("ChatUploadAvatar failed, result not 200");
             app.testrail().setResultCase(case_id, "failed", "Аватар не удалось установить, код ответ " + status_cod);
         }
     }
 
     @Test(priority = 1)
     public void testChatRemoveAvatar(){
+        app.waiter(2000);
+
         int case_id = 0;
         //Сделать значение динамичным
         String group_chat = "{21dfcc12-503d-4d2b-b316-ec0b72022ff0}@conference.mtalker.mangotele.com";
