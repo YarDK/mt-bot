@@ -38,7 +38,7 @@ public class JsonPersonalChat {
         return chat_remove_all.toString();
     }
 
-    public String messageHistory(){
+    public String messageHistoryForAccount(String account){
         JsonObject message_history = new JsonObject();
         message_history.addProperty("latest", 1);
         message_history.addProperty("limit", 100);
@@ -46,13 +46,26 @@ public class JsonPersonalChat {
 
         JsonArray talkers_arr = new JsonArray();
         JsonObject talkers = new JsonObject();
-        talkers.addProperty("account", "401530378@mtalker.mangotele.com");
+        talkers.addProperty("account", account);
         talkers_arr.add(talkers);
 
         message_history.add("talkers", talkers_arr);
         message_history.addProperty("toId", "304959329615186528");
         return message_history.toString();
     }
+
+    public String messageHistoryForAllChats(){
+        JsonObject message_history = new JsonObject();
+        message_history.addProperty("latest", 1);
+        message_history.addProperty("limit", 100);
+
+        message_history.addProperty("allChats", true);
+        message_history.addProperty("includeUnread", 1);
+        message_history.addProperty("unreadLimit", 100);
+
+        return message_history.toString();
+    }
+
 
     public String smsListGet(){
         JsonObject sms_list_get = new JsonObject();
@@ -68,6 +81,19 @@ public class JsonPersonalChat {
         message_notify_read.addProperty("sid", "304959329615186528");
         return message_notify_read.toString();
     }
+
+    public String chatRemoveAvatar(String account){
+        JsonObject chat_remove_avatar = new JsonObject();
+        chat_remove_avatar.addProperty("account", account);
+        return chat_remove_avatar.toString();
+    }
+
+    public String chatUploadAvatar(String account){
+        JsonObject chat_upload_avatar = new JsonObject();
+        chat_upload_avatar.addProperty("account", account);
+        return chat_upload_avatar.toString();
+    }
+
 
 
 }

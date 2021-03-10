@@ -1,6 +1,7 @@
 package Requests;
 
 import ApplicationManager.MainApplication;
+import com.jayway.restassured.builder.MultiPartSpecBuilder;
 import jsons.channel.JsonChannel;
 import jsons.chat.group.JsonGroupChat;
 import jsons.chat.personal.JsonPersonalChat;
@@ -9,6 +10,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
+
+import java.io.File;
 
 public class ChatRequests extends MainApplication {
     
@@ -103,4 +106,63 @@ public class ChatRequests extends MainApplication {
         return post_response(json, url, data);
     }
 
+    public JsonObject chatRemoveAll(){
+        String json = new JsonPersonalChat().chatRemoveAll();
+        String url = "/chat/removeAll";
+        return post_response(json, url, data);
+    }
+
+    public JsonObject messageHistoryForAccount(String account){
+        String json = new JsonPersonalChat().messageHistoryForAccount(account);
+        String url = "/message/history";
+        return post_response(json, url, data);
+    }
+
+    public JsonObject messageHistoryForAllChats(){
+        String json = new JsonPersonalChat().messageHistoryForAllChats();
+        String url = "/message/history";
+        return post_response(json, url, data);
+    }
+
+    public JsonObject smsListGet(){
+        String json = new JsonPersonalChat().smsListGet();
+        String url = "/smslist/get";
+        return post_response(json, url, data);
+    }
+
+    public JsonObject messageNotifyRead(String account){
+        String json = new JsonPersonalChat().messageNotifyRead(account);
+        String url = "/message/notifyRead";
+        return post_response(json, url, data);
+    }
+
+    public JsonObject chatRemoveAvatar(String account){
+        String json = new JsonPersonalChat().chatRemoveAvatar(account);
+        String url = "/chat/removeAvatar";
+        return post_response(json, url, data);
+    }
+
+    public JsonObject chatUploadAvatar(String account, String file_name, String file_extension){
+        String resources = "src/test/resources/";
+        //String filename = "testavatar.png";
+
+        //String file_path = "src/test/resources/testavatar.png";
+        File file_avatar = new File(resources + file_name);
+        String url = "/chat/uploadAvatar";
+
+        // Отправка файла на сервер
+        String post_request = RestAssured.given()
+                .multiPart(new MultiPartSpecBuilder(file_avatar)
+                        .controlName("userfile")
+                        .fileName(file_name)
+                        .mimeType("image/" + file_extension)
+                        .build())
+                .auth()
+                .preemptive()
+                .basic(data.getAccount(), data.getHash())
+                .param("account", account)
+                .post(data.getUrl_4talk() + url).asString();
+
+        return JsonParser.parseString(post_request).getAsJsonObject();
+    }
 }

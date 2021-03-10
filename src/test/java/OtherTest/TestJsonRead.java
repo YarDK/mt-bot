@@ -105,7 +105,6 @@ public class TestJsonRead {
                 .preemptive()
                 .basic(account, hash)
                 .param("account", "{21dfcc12-503d-4d2b-b316-ec0b72022ff0}@conference.mtalker.mangotele.com")
-                .param("userfile", filename)
                 .post(url).asString();
 
         System.out.println(post_request);
