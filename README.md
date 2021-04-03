@@ -12,3 +12,9 @@
 
 Для настройки переменных середы нужно внести изменения в соответствующий файл 
 в папке \src\main\resources
+
+Running a Single Test
+mvn -Dtest=TestCircle test
+
+Запуск testng.xml с заданной средой
+mvn test -Denvironment=pres
