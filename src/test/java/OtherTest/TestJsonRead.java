@@ -1,20 +1,19 @@
 package OtherTest;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.builder.MultiPartSpecBuilder;
 import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.response.Response;
 import jsons.channel.JsonChannel;
+import org.openqa.selenium.json.Json;
 import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Date;
 
 import static com.jayway.restassured.RestAssured.given;
 
@@ -63,20 +62,23 @@ public class TestJsonRead {
 
     @Test
     public void test3() {
-        JsonObject message_history = new JsonObject();
-        message_history.addProperty("latest", 1);
-        message_history.addProperty("limit", 100);
+        //{
+        // "sinceTime": 1498413600000,
+        // "toTime": 1512604800000,
+        // "sinceId": 1,
+        // "limit": 100
+        //}
 
 
-        JsonArray talkers_arr = new JsonArray();
-        JsonObject talkers = new JsonObject();
-        talkers.addProperty("account", "401530378@mtalker.mangotele.com");
-        talkers_arr.add(talkers);
+        JsonObject json_getData = new JsonObject();
+        json_getData.addProperty("sinceTime", 1498413600000L);
+        json_getData.addProperty("toTime",1512604800000L);
+        json_getData.addProperty("sinceId",1);
+        json_getData.addProperty("limit",100);
 
-        message_history.add("talkers", talkers_arr);
-        message_history.addProperty("toId", "304959329615186528");
+        // Creates the json object which will manage the information received
 
-        System.out.println(message_history);
+        System.out.println(json_getData);
 
     }
 

@@ -40,12 +40,6 @@ public class CallHistoryRequests extends MainApplication {
         return post_response(json,url,data);
     }
 
-    public JsonObject callsHistory_ref(String number){
-        String json = new JsonCalls().callsHistory(number);
-        String url = "/calls/history";
-        return post_response(json,url,data);
-    }
-
     public JsonObject callsNotifyAnswered(String callId, String contextId){
         String json = new JsonCalls().callsNotifyAnswered(callId,contextId);
         String url = "/calls/notifyAnswered";

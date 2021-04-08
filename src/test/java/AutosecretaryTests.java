@@ -13,7 +13,7 @@ public class AutosecretaryTests extends TestBase{
 
     @BeforeClass
     public void testAddRule(){
-        int case_id = 0;
+        int case_id = 1346876;
         JsonObject response_autosecretary_add =  app.autosecretary().add();
 
         int status_cod = response_autosecretary_add.get("statusCode").getAsInt();
@@ -30,24 +30,36 @@ public class AutosecretaryTests extends TestBase{
 
     @Test
     public void testGetRules(){
-        int case_id = 0;
+        int case_id = 1346882;
         JsonObject response_autosecretary_get =  app.autosecretary().get();
         int status_cod = response_autosecretary_get.get("statusCode").getAsInt();
-        System.out.println("status_cod:\n" + status_cod);
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "Запрос правил успешный");
+        } else {
+            Assert.fail("Groups not get, result not 200");
+            app.testrail().setResultCase(case_id, "failed", "Запрос правил не успешный, код ответа " + status_cod);
+        }
     }
 
 
     @Test
     public void testUpdateRule(){
-        int case_id = 0;
+        int case_id = 1346885;
         JsonObject response_autosecretary_update=  app.autosecretary().update(rule_id);
         int status_cod = response_autosecretary_update.get("statusCode").getAsInt();
-        System.out.println("status_cod:\n" + status_cod);
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "Обновление правила успешно");
+        } else {
+            Assert.fail("Rule not update, result not 200");
+            app.testrail().setResultCase(case_id, "failed", "Обновление правил не успешно, код ответа " + status_cod);
+        }
     }
 
     @Test
     public void testGetMelodies(){
-        int case_id = 0;
+        int case_id = 1346879;
         JsonObject response_product_get_melodies = app.autosecretary().getMelodies();
 
         // Достаем одну мелодию для дальнейшего прохождения кейсов
@@ -71,7 +83,7 @@ public class AutosecretaryTests extends TestBase{
 
     @Test
     public void testGetGroups(){
-        int case_id = 0;
+        int case_id = 1346888;
         JsonObject response_product_get_groups = app.autosecretary().getGroups();
 
         int status_cod = response_product_get_groups.get("statusCode").getAsInt();
@@ -86,18 +98,30 @@ public class AutosecretaryTests extends TestBase{
 
     @Test(priority = 1)
     public void testGetFile(){
-        System.out.println("\n!!!!!!!!!!!Проверить, что тут вывелось!!!!!!");
-        int case_id = 0;
+        int case_id = 1346891;
         JsonObject response_autosecretary_get_file =  app.autosecretary().getFile(melody_file_id);
-        System.out.println("\n!!!!!!!!!!!Проверить, что тут вывелось!!!!!!");
+        int status_cod = response_autosecretary_get_file.get("statusCode").getAsInt();
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "Файл успешно получен");
+        } else {
+            Assert.fail("GetFile result not 200");
+            app.testrail().setResultCase(case_id, "failed", "Файл не получен, код ответа " + status_cod);
+        }
     }
 
     @AfterClass
     public void testDelRule(){
-        int case_id = 0;
+        int case_id = 1346894;
         JsonObject response_autosecretary_del=  app.autosecretary().del(rule_id);
         int status_cod = response_autosecretary_del.get("statusCode").getAsInt();
-        System.out.println("status_cod:\n" + status_cod);
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "Правило успешно удалено");
+        } else {
+            Assert.fail("GetFile result not 200");
+            app.testrail().setResultCase(case_id, "failed", "Правило не удалено, код ответа " + status_cod);
+        }
     }
 
 }

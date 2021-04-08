@@ -39,7 +39,7 @@ public class PersonalChatTests extends TestBase {
 
     @Test(enabled = false)
     public void testChatRemoveAll(){
-        int case_id = 0;
+        int case_id = 1347197;
 
         int status_cod = app.chat().chatRemoveAll().get("statusCode").getAsInt();
 
@@ -53,7 +53,7 @@ public class PersonalChatTests extends TestBase {
 
     @Test
     public void testMessageHistoryForAllChats(){
-        int case_id = 0;
+        int case_id = 1347200;
 
         //придумать как доставать разные типы чатов для других тестов
         JsonObject response_message_history_for_all_chats = app.chat().messageHistoryForAllChats();
@@ -69,7 +69,7 @@ public class PersonalChatTests extends TestBase {
 
     @Test
     public void testSmsListGet(){
-        int case_id = 0;
+        int case_id = 1347203;
 
         int status_cod = app.chat().smsListGet().get("statusCode").getAsInt();
 
@@ -83,7 +83,7 @@ public class PersonalChatTests extends TestBase {
 
     @Test(enabled = false)
     public void testMessageNotifyRead(){
-        int case_id = 0;
+        int case_id = 1347206;
 
         int status_cod = app.chat().messageNotifyRead(account).get("statusCode").getAsInt();
 
@@ -95,42 +95,5 @@ public class PersonalChatTests extends TestBase {
         }
     }
 
-    @Test
-    public void testChatUploadAvatar(){
-        int case_id = 0;
-        //Сделать значение динамичным
-        String group_chat = "{21dfcc12-503d-4d2b-b316-ec0b72022ff0}@conference.mtalker.mangotele.com";
-
-        String file_name = "testavatar.png";
-        String file_extension = "png";
-
-
-        int status_cod = app.chat().chatUploadAvatar(group_chat, file_name, file_extension).get("statusCode").getAsInt();
-
-        if(status_cod == 200){
-            app.testrail().setResultCase(case_id, "passed", "Аватар успешно установлен");
-        } else {
-            Assert.fail("ChatUploadAvatar failed, result not 200");
-            app.testrail().setResultCase(case_id, "failed", "Аватар не удалось установить, код ответ " + status_cod);
-        }
-    }
-
-    @Test(priority = 1)
-    public void testChatRemoveAvatar(){
-        app.waiter(2000);
-
-        int case_id = 0;
-        //Сделать значение динамичным
-        String group_chat = "{21dfcc12-503d-4d2b-b316-ec0b72022ff0}@conference.mtalker.mangotele.com";
-
-        int status_cod = app.chat().chatRemoveAvatar(group_chat).get("statusCode").getAsInt();
-
-        if(status_cod == 200){
-            app.testrail().setResultCase(case_id, "passed", "Аватар успешно удален");
-        } else {
-            Assert.fail("ChatRemoveAvatar failed, result not 200");
-            app.testrail().setResultCase(case_id, "failed", "Аватар не удален, код ответ " + status_cod);
-        }
-    }
 
 }

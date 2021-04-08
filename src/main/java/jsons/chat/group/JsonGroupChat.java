@@ -50,4 +50,5 @@ public class JsonGroupChat {
         main_json.addProperty("account", account);
         return main_json.toString();
     }
+
 }

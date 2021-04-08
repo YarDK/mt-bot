@@ -1,12 +1,14 @@
 package Requests;
 
+import ApplicationManager.MainApplication;
 import Models.RegisterData;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.jayway.restassured.RestAssured;
+import jsons.stats.JsonStats;
 import org.testng.Assert;
 
-public class SessionsRequests {
+public class SessionsRequests extends MainApplication {
     public RegisterData data;
 
     public SessionsRequests(RegisterData data) {
@@ -148,5 +150,17 @@ public class SessionsRequests {
                 json_account_hash.getAsJsonObject().get("statusCode").getAsInt(),
                 200,
                 "Registration failed, result not 200");
+    }
+
+    public JsonObject statsGetData(){
+        String url = "/stats/getData";
+        String json = new JsonStats().getData();
+        return post_response(json, url, data);
+    }
+
+    public JsonObject statsGetLaunches(){
+        String url = "/stats/getLaunches";
+        String json = new JsonStats().getLaunches();
+        return post_response(json, url, data);
     }
 }

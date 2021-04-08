@@ -1,10 +1,7 @@
 package ApplicationManager;
 
 import Models.RegisterData;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
@@ -68,7 +65,14 @@ public class MainMethods {
                 .body(json)
                 .post(data.getUrl_4talk() + url).asString();
         System.out.println("\nResponse for "+url+":\n" + post_request);
-        return JsonParser.parseString(post_request).getAsJsonObject();
+        try {
+            return JsonParser.parseString(post_request).getAsJsonObject();
+        } catch (JsonSyntaxException e){
+            e.printStackTrace();
+            JsonObject err_json = new JsonObject();
+            err_json.addProperty("response", post_request);
+            return err_json;
+        }
     }
 
 

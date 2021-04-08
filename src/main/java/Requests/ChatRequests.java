@@ -144,9 +144,7 @@ public class ChatRequests extends MainApplication {
 
     public JsonObject chatUploadAvatar(String account, String file_name, String file_extension){
         String resources = "src/test/resources/";
-        //String filename = "testavatar.png";
 
-        //String file_path = "src/test/resources/testavatar.png";
         File file_avatar = new File(resources + file_name);
         String url = "/chat/uploadAvatar";
 
@@ -166,4 +164,6 @@ public class ChatRequests extends MainApplication {
         System.out.println("Response UploadAvatar:\n" + post_request);
         return JsonParser.parseString(post_request).getAsJsonObject();
     }
+
+
 }

@@ -44,7 +44,7 @@ public class CallHistoryTests extends TestBase {
 
     @Test
     public void testCallsHistory(){
-        int case_id = 0;
+        int case_id = 1347005;
 
         String number = "74955404444";
         JsonObject response_calls_history = app.callHistory().callsHistory(number);
@@ -62,29 +62,10 @@ public class CallHistoryTests extends TestBase {
         }
     }
 
-    @Test
-    public void testCallsHistory_ref(){
-        int case_id = 0;
-
-        String number = "74955404444";
-        JsonObject response_calls_history = app.callHistory().callsHistory_ref(number);
-        int status_cod = response_calls_history.get("statusCode").getAsInt();
-
-        if(status_cod == 200){
-            app.testrail().setResultCase(case_id, "passed", "История звонокв по номеру " + number + " получена успешно");
-        } else {
-            Assert.fail("Calls history for number '"+number+"' not getting, result not 200");
-            app.testrail().setResultCase(
-                    case_id,
-                    "failed",
-                    "История звонокв по номеру " + number + " не получена.\nКод ответа " + status_cod
-            );
-        }
-    }
 
     @Test
     public void testCallsNotifyAnswered(){
-        int case_id = 0;
+        int case_id = 1347053;
 
         // Придумать откуда брать данные о звонке, сейча берутся статичные данные конткрентого звонка:
         String callId = "534344147";
@@ -100,7 +81,8 @@ public class CallHistoryTests extends TestBase {
             app.testrail().setResultCase(
                     case_id,
                     "failed",
-                    "Уведомление об ответе на звонок отправлено не успешно, код ответа " + status_cod
+                    "Уведомление об ответе на звонок отправлено не успешно, код ответа " + status_cod +
+                            "\nВозможна ошибка на стороны статичных данных, проверить наличие контекста " + contextId
             );
         }
     }
@@ -108,7 +90,7 @@ public class CallHistoryTests extends TestBase {
 
     @Test
     public void testCallsNotifyStarted(){
-        int case_id = 0;
+        int case_id = 1347056;
 
         // Придумать откуда брать данные о звонке, сейча берутся статичные данные конткрентого звонка:
         String contextId = "11136781099";
@@ -130,7 +112,7 @@ public class CallHistoryTests extends TestBase {
 
     @Test
     public void testCallsSearch(){
-        int case_id = 0;
+        int case_id = 1347059;
 
         // Придумать откуда брать данные о звонке, сейча берутся статичные данные конткрентого звонка:
         String query = "test";
@@ -152,7 +134,7 @@ public class CallHistoryTests extends TestBase {
 
     @Test
     public void testCallsSync(){
-        int case_id = 0;
+        int case_id = 1347062;
 
         JsonObject response_calls_sync= app.callHistory().callsSync();
         int status_cod = response_calls_sync.get("statusCode").getAsInt();
@@ -171,7 +153,7 @@ public class CallHistoryTests extends TestBase {
 
     @Test(enabled = false)
     public void testCallsRemove(){
-        int case_id = 0;
+        int case_id = 1347065;
         // Добавить sid звонка, надо как-то автоматизировать
         String sid = "";
 
@@ -211,7 +193,7 @@ public class CallHistoryTests extends TestBase {
 
     @Test
     public void callsResetMissedCount(){
-        int case_id = 0;
+        int case_id = 1347071;
         // Добавить sid звонка, надо как-то автоматизировать
         String sid = "417519551034404480";
 
@@ -231,20 +213,24 @@ public class CallHistoryTests extends TestBase {
 
     @Test
     public void testCallsSetOutgoingLine(){
-        int case_id = 0;
+        int case_id = 1347074;
         String account = app.data().getAccount();
         String outgoingline = "74951203279";
 
         int status_cod = app.callHistory().callsSetOutgoingLine(account, outgoingline).get("statusCode").getAsInt();
 
         if(status_cod == 200){
-            app.testrail().setResultCase(case_id, "passed", "Номер '"+outgoingline+"' успешно установлен для аккаунт "+account);
+            app.testrail().setResultCase(
+                    case_id,
+                    "passed",
+                    "Номер '"+outgoingline+"' успешно установлен для аккаунт "+account
+            );
         } else {
             Assert.fail("Calls Set Outgoing Line failed, result not 200");
             app.testrail().setResultCase(
                     case_id,
                     "failed",
-                    "Не удалось установить номер исходящей связи. Код ответа " + status_cod
+                    "Не удалось установить номер исходящей связи '"+outgoingline+"'. Код ответа " + status_cod
             );
         }
     }

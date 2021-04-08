@@ -57,6 +57,39 @@ public class GroupChatTests extends TestBase {
         }
     }
 
+    @Test
+    public void testChatUploadAvatar(){
+        int case_id = 1347209;
+
+        String file_name = "testavatar.png";
+        String file_extension = "png";
+
+
+        int status_cod = app.chat().chatUploadAvatar(account, file_name, file_extension).get("statusCode").getAsInt();
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "Аватар успешно установлен");
+        } else {
+            Assert.fail("ChatUploadAvatar failed, result not 200");
+            app.testrail().setResultCase(case_id, "failed", "Аватар не удалось установить, код ответ " + status_cod);
+        }
+    }
+
+    @Test(priority = 1, enabled = false)
+    public void testChatRemoveAvatar(){
+        app.waiter(2000);
+
+        int case_id = 1347212;
+        int status_cod = app.chat().chatRemoveAvatar(account).get("statusCode").getAsInt();
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "Аватар успешно удален");
+        } else {
+            Assert.fail("ChatRemoveAvatar failed, result not 200");
+            app.testrail().setResultCase(case_id, "failed", "Аватар не удален, код ответ " + status_cod);
+        }
+    }
+
     @AfterClass
     public void testGroupChatRemove(){
         int case_id = 1188416;
