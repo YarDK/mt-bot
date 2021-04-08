@@ -51,4 +51,29 @@ public class JsonGroupChat {
         return main_json.toString();
     }
 
+    public String chatOnline(String account){
+        JsonObject json_chat_online = new JsonObject();
+        json_chat_online.addProperty("account", account);
+        return json_chat_online.toString();
+    }
+
+    public String chatOffline(String account){
+        JsonObject json_chat_online = new JsonObject();
+        json_chat_online.addProperty("account", account);
+        return json_chat_online.toString();
+    }
+
+    public String chatMuteOn(String account){
+        JsonObject json_chat_mute_on = new JsonObject();
+        json_chat_mute_on.addProperty("account",account);
+        json_chat_mute_on.addProperty("mute", true);
+        return json_chat_mute_on.toString();
+    }
+
+    public String chatMuteOff(String account){
+        JsonObject json_chat_mute_on = new JsonObject();
+        json_chat_mute_on.addProperty("account",account);
+        json_chat_mute_on.addProperty("mute", false);
+        return json_chat_mute_on.toString();
+    }
 }

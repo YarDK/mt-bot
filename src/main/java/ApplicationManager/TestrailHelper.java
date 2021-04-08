@@ -133,6 +133,7 @@ public class TestrailHelper {
                             new Result().setStatusId(status_id).setComment(comment),
                             customResultFields)
                     .execute();
+
         } else {
             System.out.println("\nTestRail not set. Skip set result.");
         }

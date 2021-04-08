@@ -48,18 +48,21 @@ public class Testtest {
         String avatar_id = "5e49b4d6b7ef188c9459c587818130c97bafbb2aca93023daa6524fb6ca5b87ec3967d7be5f99760491a4c962f0e1efa1bd8f8b461c79fbb975f3376c98656f420cf38724a5459e6";
         String url = "https://chatfs.mango-office.ru/avatars/" + avatar_id;
         System.out.println(url);
-        Response get_request = RestAssured.given()
-                //.queryParam("","")
-                .when().get(url);
+        Response get_request = RestAssured.get(url);
+        System.out.println(get_request.getStatusCode());
+        System.out.println(get_request.getHeaders());
+        System.out.println("@@@@@");
+        System.out.println(get_request.getHeader("Content-Disposition").split("=")[1]);
 
-        try{
+
+        /*try{
             File outputFile = new File("src/test/resources/outputFile.jpg");
             outputFile.createNewFile();
 
             Files.write(outputFile.toPath(), get_request.body().asByteArray());
         } catch (Exception e){
             e.printStackTrace();
-        }
+        }*/
 
     }
 }

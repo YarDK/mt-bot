@@ -5,10 +5,12 @@ import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
+import com.jayway.restassured.response.Response;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.nio.file.Files;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -73,6 +75,17 @@ public class MainMethods {
             err_json.addProperty("response", post_request);
             return err_json;
         }
+    }
+
+
+    public Response get_response(String url, RegisterData data){
+        Response get_request = RestAssured.get(data.getUrl_fs() + url);
+        System.out.println("\nResponse cod for "+url+":\n" + get_request.getStatusCode());
+        // Обработка индивидуальна со стороны заправшиваемого метода
+        //get_request.body().print()
+        //get_request.asString()
+        //get_request.getStatusCode()
+        return get_request;
     }
 
 

@@ -2,6 +2,7 @@ package Requests;
 
 import ApplicationManager.MainApplication;
 import com.jayway.restassured.builder.MultiPartSpecBuilder;
+import com.jayway.restassured.response.Response;
 import jsons.channel.JsonChannel;
 import jsons.chat.group.JsonGroupChat;
 import jsons.chat.personal.JsonPersonalChat;
@@ -166,4 +167,32 @@ public class ChatRequests extends MainApplication {
     }
 
 
+    public Response getAvatar(String avatar_id){
+        String url = "/avatars/" + avatar_id;
+        return get_response(url, data);
+    }
+
+    public JsonObject chatOnline(String account){
+        String url = "/chat/online";
+        String json = new JsonGroupChat().chatOnline(account);
+        return post_response(json,url,data);
+    }
+
+    public JsonObject chatOffline(String account){
+        String url = "/chat/offline";
+        String json = new JsonGroupChat().chatOffline(account);;
+        return post_response(json,url,data);
+    }
+
+    public JsonObject chatMuteOn(String account){
+        String url = "/chat/mute";
+        String json = new JsonGroupChat().chatMuteOn(account);
+        return post_response(json,url,data);
+    }
+
+    public JsonObject chatMuteOff(String account){
+        String url = "/chat/mute";
+        String json = new JsonGroupChat().chatMuteOff(account);
+        return post_response(json,url,data);
+    }
 }
