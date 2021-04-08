@@ -1,19 +1,21 @@
 import com.google.gson.JsonObject;
+import org.junit.After;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class PersonalChatTests extends TestBase {
 
     private final String account = "401809841@mtalker.mangotele.com";
     private final String local_id = "abcdef0123456789abc" + System.currentTimeMillis();
+    private String msg_sid;
 
-    @Test
+    @BeforeTest
     public void testCreatePersonalChat() {
         int case_id = 1188419;
         JsonObject response_personal_chat_create = app.chat().personalChatCreate(local_id, account);
         int status_cod = response_personal_chat_create.get("statusCode").getAsInt();
+        msg_sid = response_personal_chat_create
+                .get("data").getAsJsonArray().get(0).getAsJsonObject().get("sid").getAsString();
 
         if(status_cod == 200){
             app.testrail().setResultCase(case_id, "passed", "Личный чат успешно создан");
@@ -23,19 +25,20 @@ public class PersonalChatTests extends TestBase {
         }
     }
 
-    @Test(priority = 1)
-    public void testRemovePersonalChat() {
-        int case_id = 1188422;
-        JsonObject response_personal_chat_remove = app.chat().personalChatRemove(account);
-        int status_cod = response_personal_chat_remove.get("statusCode").getAsInt();
+    @Test
+    public void testMessageEdit(){
+        int case_id = 0;
+        JsonObject response_message_edit = app.chat().messageEdit(account,msg_sid,local_id);
+        int status_cod = response_message_edit.get("statusCode").getAsInt();
 
         if(status_cod == 200){
-            app.testrail().setResultCase(case_id, "passed", "Личный чат успешно удален");
+            app.testrail().setResultCase(case_id, "passed", "Сообщение успешно изменено");
         } else {
-            Assert.fail("Personal chat not removed, result not 200");
-            app.testrail().setResultCase(case_id, "failed", "Личный чат не удален, код ответ " + status_cod);
+            Assert.fail("Message edit failed, result not 200");
+            app.testrail().setResultCase(case_id, "failed", "Сообщение не удалось изменить, код ответ " + status_cod);
         }
     }
+
 
     @Test(enabled = false)
     public void testChatRemoveAll(){
@@ -92,6 +95,20 @@ public class PersonalChatTests extends TestBase {
         } else {
             Assert.fail("MessageNotifyRead failed, result not 200");
             app.testrail().setResultCase(case_id, "failed", "Уведомление о прочтении не успешно, код ответ " + status_cod);
+        }
+    }
+
+    @AfterTest
+    public void testRemovePersonalChat() {
+        int case_id = 1188422;
+        JsonObject response_personal_chat_remove = app.chat().personalChatRemove(account);
+        int status_cod = response_personal_chat_remove.get("statusCode").getAsInt();
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "Личный чат успешно удален");
+        } else {
+            Assert.fail("Personal chat not removed, result not 200");
+            app.testrail().setResultCase(case_id, "failed", "Личный чат не удален, код ответ " + status_cod);
         }
     }
 

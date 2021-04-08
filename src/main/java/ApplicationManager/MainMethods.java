@@ -35,29 +35,29 @@ public class MainMethods {
         return date_to_finish_dnd.getTime();
     }
 
-    public Set<String> getSid(JsonObject response_calls_recent){
+    public Set<String> getSid(JsonObject response_calls_recent) {
         Set<String> sid_list = new HashSet<>();
         JsonArray history_arr = response_calls_recent.getAsJsonObject("data").getAsJsonArray("history");
-        for(JsonElement j : history_arr){
+        for (JsonElement j : history_arr) {
             sid_list.add(j.getAsJsonObject().get("sid").getAsString());
         }
         return sid_list;
     }
 
-    public String getJson(String file_path){
+    public String getJson(String file_path) {
 
         File json_file = new File(file_path);
         try {
             return JsonParser.parseReader(new JsonReader(new FileReader(json_file))).getAsJsonObject().toString();
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("File '" + file_path + "' not found");
             e.printStackTrace();
             return null;
         }
     }
 
-    public JsonObject post_response(String json, String url, RegisterData data){
-        System.out.println("\nJson for "+url+":\n" + json);
+    public JsonObject post_response(String json, String url, RegisterData data) {
+        System.out.println("\nJson for " + url + ":\n" + json);
 
         String post_request = RestAssured.given()
                 .auth()
@@ -66,10 +66,10 @@ public class MainMethods {
                 .contentType(ContentType.JSON)
                 .body(json)
                 .post(data.getUrl_4talk() + url).asString();
-        System.out.println("\nResponse for "+url+":\n" + post_request);
+        System.out.println("\nResponse for " + url + ":\n" + post_request);
         try {
             return JsonParser.parseString(post_request).getAsJsonObject();
-        } catch (JsonSyntaxException e){
+        } catch (JsonSyntaxException e) {
             e.printStackTrace();
             JsonObject err_json = new JsonObject();
             err_json.addProperty("response", post_request);
@@ -78,16 +78,15 @@ public class MainMethods {
     }
 
 
-    public Response get_response(String url, RegisterData data){
-        Response get_request = RestAssured.get(data.getUrl_fs() + url);
-        System.out.println("\nResponse cod for "+url+":\n" + get_request.getStatusCode());
+    public Response get_response(String url) {
+        Response get_request = RestAssured.get(url);
+        System.out.println("\nResponse cod for " + url + ":\n" + get_request.getStatusCode());
         // Обработка индивидуальна со стороны заправшиваемого метода
         //get_request.body().print()
         //get_request.asString()
         //get_request.getStatusCode()
         return get_request;
     }
-
 
 
 }

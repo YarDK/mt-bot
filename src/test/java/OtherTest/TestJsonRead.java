@@ -50,35 +50,31 @@ public class TestJsonRead {
 
     @Test
     public void test2() {
-        JsonChannel jsonChannel = new JsonChannel();
-        System.out.println(jsonChannel.createChannel("local_id_number_example"));
-        System.out.println(jsonChannel.editChannel("account_example"));
-        System.out.println(jsonChannel.channelSetType("account_example"));
-        System.out.println(jsonChannel.addMembers("account_example", "members_example"));
-        System.out.println(jsonChannel.removeChanel("account_example"));
-        System.out.println(jsonChannel.messageSend("channel_id_example", "local_id_number_example"));
+        String json = "{\"status\":\"ok\",\"statusCode\":200,\"data\":[{\"sid\":\"418276511539006752\",\"utc\":1617892623199,\"localId\":\"deafc9bc8c9537df6d413d7337ac5feb\",\"account\":\"402351995@mtalker.mangotele.com\"}]}";
+        JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
+        System.out.println(jsonObject.get("data").getAsJsonArray().get(0).getAsJsonObject().get("sid").getAsString());
     }
 
 
     @Test
     public void test3() {
-        //{
-        // "sinceTime": 1498413600000,
-        // "toTime": 1512604800000,
-        // "sinceId": 1,
-        // "limit": 100
-        //}
+        JsonObject json_messages = new JsonObject();
+        JsonObject messages = new JsonObject();
+        messages.addProperty("localId", "localId_number");
+
+        JsonObject payload_into = new JsonObject();
+        payload_into.addProperty("body", "edited_text_message");
+
+        messages.add("payload", payload_into);
+        messages.addProperty("sid", "sid_number");
+        messages.addProperty("to", "account_number");
+
+        JsonArray messages_arr = new JsonArray();
+        messages_arr.add(messages);
+        json_messages.add("messages", messages_arr);
 
 
-        JsonObject json_getData = new JsonObject();
-        json_getData.addProperty("sinceTime", 1498413600000L);
-        json_getData.addProperty("toTime",1512604800000L);
-        json_getData.addProperty("sinceId",1);
-        json_getData.addProperty("limit",100);
-
-        // Creates the json object which will manage the information received
-
-        System.out.println(json_getData);
+        System.out.println(json_messages);
 
     }
 

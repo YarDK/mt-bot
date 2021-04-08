@@ -94,6 +94,22 @@ public class JsonPersonalChat {
         return chat_upload_avatar.toString();
     }
 
+    public String messageEdit(String account, String sid, String localId){
+        JsonObject json_messages = new JsonObject();
+        JsonObject messages = new JsonObject();
+        messages.addProperty("localId", localId);
 
+        JsonObject payload_into = new JsonObject();
+        payload_into.addProperty("body", "edited_text_message");
+
+        messages.add("payload", payload_into);
+        messages.addProperty("sid", sid);
+        messages.addProperty("to", account);
+
+        JsonArray messages_arr = new JsonArray();
+        messages_arr.add(messages);
+        json_messages.add("messages", messages_arr);
+        return json_messages.toString();
+    }
 
 }

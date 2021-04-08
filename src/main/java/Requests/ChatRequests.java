@@ -168,8 +168,8 @@ public class ChatRequests extends MainApplication {
 
 
     public Response getAvatar(String avatar_id){
-        String url = "/avatars/" + avatar_id;
-        return get_response(url, data);
+        String url = data.getUrl_fs() + "/avatars/" + avatar_id;
+        return get_response(url);
     }
 
     public JsonObject chatOnline(String account){
@@ -193,6 +193,12 @@ public class ChatRequests extends MainApplication {
     public JsonObject chatMuteOff(String account){
         String url = "/chat/mute";
         String json = new JsonGroupChat().chatMuteOff(account);
+        return post_response(json,url,data);
+    }
+
+    public JsonObject messageEdit(String account, String sid, String localId){
+        String url = "/message/edit";
+        String json = new JsonPersonalChat().messageEdit(account, sid, localId);
         return post_response(json,url,data);
     }
 }
