@@ -2,6 +2,7 @@ package jsons.chat.personal;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import org.apache.tools.ant.taskdefs.optional.jsp.Jasper41Mangler;
 import org.openqa.selenium.json.Json;
 
 import javax.swing.*;
@@ -110,6 +111,115 @@ public class JsonPersonalChat {
         messages_arr.add(messages);
         json_messages.add("messages", messages_arr);
         return json_messages.toString();
+    }
+
+    public String messageSendSms(String local_id){
+        JsonObject json_send_sms = new JsonObject();
+        json_send_sms.addProperty("localId",local_id);
+        json_send_sms.addProperty("number","89258029823");
+        json_send_sms.addProperty("text","sms message from autotesting");
+        return json_send_sms.toString();
+    }
+
+    public String messageResendSms(String sid){
+        JsonObject json_resend_sms = new JsonObject();
+        json_resend_sms.addProperty("sid", sid);
+        return json_resend_sms.toString();
+    }
+
+    public String messageResendFax(String sid){
+        JsonObject json_resend_sms = new JsonObject();
+        json_resend_sms.addProperty("sid", sid);
+        return json_resend_sms.toString();
+    }
+
+    public String messageRemove(String account, String sid){
+        JsonObject json_message_remove = new JsonObject();
+        json_message_remove.addProperty("account", account);
+        json_message_remove.addProperty("forAll", true);
+
+        JsonArray messages_arr = new JsonArray();
+        messages_arr.add(sid);
+        json_message_remove.add("messages", messages_arr);
+        return json_message_remove.toString();
+    }
+
+    public String messageHistory(String account){
+        JsonObject json_message_history = new JsonObject();
+        json_message_history.addProperty("latest",1);
+        json_message_history.addProperty("limit",50);
+
+        JsonArray talkers_arr = new JsonArray();
+        JsonObject talkers_into = new JsonObject();
+        talkers_into.addProperty("account", account);
+        talkers_arr.add(talkers_into);
+
+        json_message_history.add("talkers", talkers_arr);
+        return json_message_history.toString();
+    }
+
+    public String messageNotifyTyping(String account){
+        // test format
+        return "{\"to\": \""+account+"\", \"finished\": false}";
+    }
+
+    public String messageNotifyReadAll(String account, String sid){
+        JsonArray messages_arr = new JsonArray();
+        JsonObject messages_into = new JsonObject();
+        messages_into.addProperty("account", account);
+        messages_into.addProperty("sid", sid);
+
+        messages_arr.add(messages_into);
+
+        JsonObject main_json = new JsonObject();
+        main_json.add("messages", messages_arr);
+        return main_json.toString();
+    }
+
+    public String messageNotifyDelivered(String account, String sid){
+        JsonArray messages_arr = new JsonArray();
+        JsonObject messages_into = new JsonObject();
+        messages_into.addProperty("account", account);
+        messages_into.addProperty("sid", sid);
+
+        messages_arr.add(messages_into);
+
+        JsonObject main_json = new JsonObject();
+        main_json.add("messages", messages_arr);
+        main_json.addProperty("getMessage", true);
+        return main_json.toString();
+    }
+
+    public String messageForward(String to, String sid, String local_id){
+        JsonArray messages_arr = new JsonArray();
+        JsonObject messages_into = new JsonObject();
+        messages_into.addProperty("to", to);
+        messages_into.addProperty("sid", sid);
+        messages_into.addProperty("localId", local_id);
+
+        messages_arr.add(messages_into);
+
+        JsonObject main_json = new JsonObject();
+        main_json.add("messages", messages_arr);
+        return main_json.toString();
+    }
+
+    public String messageSearchInPersonalChat(String account){
+        JsonObject main_json = new JsonObject();
+        main_json.addProperty("account",account);
+        main_json.addProperty("limit",1000);
+        main_json.addProperty("returnTotalCount",true);
+        main_json.addProperty("text","test");
+        main_json.addProperty("toId","418297640736498209");
+        return main_json.toString();
+    }
+
+    public String messageRemoveByType(String account, String type){
+        JsonObject main_json = new JsonObject();
+        main_json.addProperty("account",account);
+        main_json.addProperty("type",type);
+        main_json.addProperty("beforeSid","318297640736498209");
+        return main_json.toString();
     }
 
 }

@@ -11,6 +11,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
+import org.openqa.selenium.json.Json;
 
 import java.io.File;
 
@@ -201,4 +202,71 @@ public class ChatRequests extends MainApplication {
         String json = new JsonPersonalChat().messageEdit(account, sid, localId);
         return post_response(json,url,data);
     }
+
+    public JsonObject messageSendSms(String local_id){
+        String url = "/message/sendSms";
+        String json = new JsonPersonalChat().messageSendSms(local_id);
+        return post_response(json,url,data);
+    }
+
+    public JsonObject messageResendSms(String sid){
+        String url = "/message/resendSms";
+        String json = new JsonPersonalChat().messageResendSms(sid);
+        return post_response(json,url,data);
+    }
+
+    public JsonObject messageResendFax(String sid){
+        String url = "/message/resendFax";
+        String json = new JsonPersonalChat().messageResendFax(sid);
+        return post_response(json,url,data);
+    }
+
+    public JsonObject messageRemove(String account, String sid){
+        String url = "/message/remove";
+        String json = new JsonPersonalChat().messageRemove(account, sid);
+        return post_response(json,url,data);
+    }
+
+    public JsonObject messageHistory(String account){
+        String url = "/message/history";
+        String json = new JsonPersonalChat().messageHistory(account);
+        return post_response(json,url,data);
+    }
+
+    public JsonObject messageNotifyTyping(String account){
+        String url = "/message/notifyTyping";
+        String json = new JsonPersonalChat().messageNotifyTyping(account);
+        return post_response(json,url,data);
+    }
+
+    public JsonObject messageNotifyDelivered(String account, String sid){
+        String url = "/message/notifyDelivered";
+        String json = new JsonPersonalChat().messageNotifyDelivered(account, sid);
+        return post_response(json,url,data);
+    }
+
+    public JsonObject messageNotifyReadAll(String account, String sid){
+        String url = "/message/notifyReadAll";
+        String json = new JsonPersonalChat().messageNotifyReadAll(account, sid);
+        return post_response(json,url,data);
+    }
+
+    public JsonObject messageForward(String to, String sid, String local_id){
+        String url = "/message/forward";
+        String json = new JsonPersonalChat().messageForward(to, sid, local_id);
+        return post_response(json,url,data);
+    }
+
+    public JsonObject messageSearchInPersonalChat(String account){
+        String url = "/message/search";
+        String json = new JsonPersonalChat().messageSearchInPersonalChat(account);
+        return post_response(json,url,data);
+    }
+
+    public JsonObject messageRemoveByType(String account, String type){
+        String url = "/message/forward";
+        String json = new JsonPersonalChat().messageRemoveByType(account, type);
+        return post_response(json,url,data);
+    }
+
 }
