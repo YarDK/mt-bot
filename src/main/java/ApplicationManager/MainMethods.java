@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.nio.file.Files;
+import java.sql.SQLOutput;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -56,6 +57,7 @@ public class MainMethods {
         }
     }
 
+    // Для работы с 4talk сервером
     public JsonObject post_response(String json, String url, RegisterData data) {
         System.out.println("\nJson for " + url + ":\n" + json);
 
@@ -66,7 +68,37 @@ public class MainMethods {
                 .contentType(ContentType.JSON)
                 .body(json)
                 .post(data.getUrl_4talk() + url).asString();
+
+
         System.out.println("\nResponse for " + url + ":\n" + post_request);
+        try {
+            return JsonParser.parseString(post_request).getAsJsonObject();
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+            JsonObject err_json = new JsonObject();
+            err_json.addProperty("response", post_request);
+            return err_json;
+        }
+    }
+
+    // Общий метод для работы с авторизованными запросами
+    public JsonObject post_response(String json, String url, RegisterData data, Boolean not_4talk) {
+        System.out.println("\nJson for " + url + ":\n" + json);
+
+        String post_request;
+        if (not_4talk) {
+            post_request = RestAssured.given()
+                    .header("X-AUTH-TOKEN", data.getAuth_token())
+                    .contentType(ContentType.JSON)
+                    .body(json)
+                    .post(url).asString();
+
+            System.out.println("\nResponse for " + url + ":\n" + post_request);
+        } else {
+            post_request = "";
+            System.out.println("\nWrong\nUse post_response function with flag 'not_4talk=true'");
+        }
+
         try {
             return JsonParser.parseString(post_request).getAsJsonObject();
         } catch (JsonSyntaxException e) {

@@ -38,6 +38,52 @@ public class ContactPersonalTests extends TestBase {
 
     }
 
+    @Test
+    public void testPersonalContactSave(){
+        int case_id = 0;
+
+        JsonObject json_personal_save = app.contact().personalContactSave();
+        int status_cod = json_personal_save.get("statusCode").getAsInt();
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "Контакты успешно добавлены");
+        } else {
+            Assert.fail("Contact save failed, result not 200");
+            app.testrail().setResultCase(case_id, "failed", "Контакты не удалось добавить, код ответ " + status_cod);
+        }
+    }
+
+    @Test
+    public void testPersonalContactGetList(){
+        int case_id = 0;
+
+        JsonObject json_personal_save = app.contact().personalContactGetList();
+        int status_cod = json_personal_save.get("statusCode").getAsInt();
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "Список контактов успешно получен");
+        } else {
+            Assert.fail("GetList failed, result not 200");
+            app.testrail().setResultCase(case_id, "failed", "Контакты не удалось запросить, код ответ " + status_cod);
+        }
+    }
+
+
+    @Test(enabled = false)
+    public void testPersonalContactRemoveAll(){
+        int case_id = 0;
+
+        JsonObject json_personal_save = app.contact().personalContactRemoveAll();
+        int status_cod = json_personal_save.get("statusCode").getAsInt();
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "Контакты успешно удалены");
+        } else {
+            Assert.fail("Contacts removeAll failed, result not 200");
+            app.testrail().setResultCase(case_id, "failed", "Контакты не удалось удалить, код ответ " + status_cod);
+        }
+    }
+
     @AfterClass
     public void testPersonalContactRemove() {
         // Удаление

@@ -60,14 +60,66 @@ public class ContactAbTests extends TestBase{
                     "Контакт адресной книги компании не изменен, код ответа " + result_cod
             );
         }
-
-        // Assert.assertEquals(contact_update_response.getAsJsonArray("result").get(0).getAsJsonObject().get("code").getAsInt(), 1000, "Contact update failed, result not 1000");
-
     }
 
-    @Test(enabled = false)
+    @Test
+    public void testContactQuery(){
+        int case_id = 0;
+        JsonObject response_contact_query = app.contact().addressBookQuery(contact_name);
+        int result_cod = response_contact_query.get("result").getAsJsonObject().get("code").getAsInt();
+
+        if(result_cod == 1000){
+            app.testrail().setResultCase(case_id, "passed", "Контакт успешно запрошен");
+        } else {
+            Assert.fail("ContactQuery failed, result not 1000");
+            app.testrail().setResultCase(
+                    case_id,
+                    "failed",
+                    "Контакт адресной книги компании запросить не удалось, код ответа " + result_cod
+            );
+        }
+    }
+
+    @Test
+    public void testContactSrcList(){
+        int case_id = 0;
+        JsonObject response_contact_query = app.contact().addressBookSrcList(product_id);
+        int result_cod = response_contact_query.get("result").getAsJsonObject().get("code").getAsInt();
+
+        if(result_cod == 1000){
+            app.testrail().setResultCase(case_id, "passed", "Список контактов успешно запрошен");
+        } else {
+            Assert.fail("SrcList failed, result not 1000");
+            app.testrail().setResultCase(
+                    case_id,
+                    "failed",
+                    "Список контактов адресной книги компании запросить не удалось, код ответа " + result_cod
+            );
+        }
+    }
+
+    @Test
+    public void testContactQueryByPhone(){
+        int case_id = 0;
+        JsonObject response_contact_query = app.contact().addressBookQueryByPhone(product_id);
+        int result_cod = response_contact_query.get("result").getAsJsonObject().get("code").getAsInt();
+
+        if(result_cod == 1000){
+            app.testrail().setResultCase(case_id, "passed", "Контакт успешно запрошен по номеру");
+        } else {
+            Assert.fail("QueryByPhone failed, result not 1000");
+            app.testrail().setResultCase(
+                    case_id,
+                    "failed",
+                    "Контакт адресной книги компании запросить по номеру не удалось, код ответа " + result_cod
+            );
+        }
+    }
+
+
+    @Test(priority = 1)
     public void testGetContactAb(){
-        JsonObject contact_get_response = app.contact().addressBookGetContact(400062183, "56584860");
+        JsonObject contact_get_response = app.contact().addressBookGetContact(product_id, contact_id);
         Assert.assertEquals(
                 contact_get_response.getAsJsonObject("result").get("code").getAsInt(),
                 1000,

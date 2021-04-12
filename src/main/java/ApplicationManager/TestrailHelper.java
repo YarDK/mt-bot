@@ -120,7 +120,7 @@ public class TestrailHelper {
                 break;
         }
 
-        if(testrailData.getTestRail() != null) {
+        if(testrailData.getTestRail() != null && case_id != 0) {
             // Поля данных (статус, id, название и тд)
             List<ResultField> customResultFields = testrailData.getTestRail().resultFields().list().execute();
 

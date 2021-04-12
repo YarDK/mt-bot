@@ -1,0 +1,74 @@
+{
+  "contacts": [
+    {
+      "contactData": {
+        "firstName": "Ivan",
+        "lastName": "Ivanov",
+        "company": "5talk",
+        "position": "Developer",
+        "phones": [
+          {
+            "type": "mobile",
+            "phone": "+79601111111"
+          },
+          {
+            "type": "home",
+            "phone": " 79602222222"
+          }
+        ],
+        "emails": [
+          {
+            "type": "home",
+            "email": "1@yandex.ru"
+          },
+          {
+            "type": "work",
+            "email": "2@yandex.ru"
+          }
+        ],
+        "sipIds": [
+          "1@mango.com",
+          "2@mango.com"
+        ],
+        "url": "http://4talk.com",
+        "note": "NOTE NOTE"
+      },
+      "localId": "3b318389038f45519d973843a59fcd8e"
+    },
+    {
+      "contactData": {
+        "firstName": "Petr",
+        "lastName": "Petrov",
+        "company": "5talk",
+        "position": "Developer",
+        "phones": [
+          {
+            "type": "mobile",
+            "phone": "+79603333333"
+          },
+          {
+            "type": "home",
+            "phone": " 79604444444"
+          }
+        ],
+        "emails": [
+          {
+            "type": "home",
+            "email": "3@yandex.ru"
+          },
+          {
+            "type": "work",
+            "email": "4@yandex.ru"
+          }
+        ],
+        "sipIds": [
+          "3@mango.com",
+          "4@mango.com"
+        ],
+        "url": "http://4talk.com",
+        "note": "NOTE NOTE"
+      },
+      "localId": "3b318389128f45519d973843a59fcd8e"
+    }
+  ]
+}
