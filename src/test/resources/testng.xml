@@ -4,7 +4,7 @@
 <suite name="Suite1" verbose="1">
     <test name="All server test">
         <classes>
-            <class name="EmployeeTests"/>
+            <class name="TestSession"/>
         </classes>
     </test>
 </suite>

@@ -26,4 +26,13 @@ public class JsonStats {
         return json_getData.toString();
     }
 
+    public String appLaunch(String deviceId, String deviceName, String os){
+        JsonObject main_json = new JsonObject();
+        main_json.addProperty("deviceId", deviceId);
+        main_json.addProperty("deviceName", deviceName);
+        main_json.addProperty("os", os);
+        return main_json.toString();
+
+    }
+
 }

@@ -6,7 +6,10 @@ import Models.RegisterData;
 import com.google.gson.*;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
+import com.jayway.restassured.response.Response;
+import jsons.feature.JsonFeature;
 import jsons.stats.JsonStats;
+import org.openqa.selenium.json.Json;
 import org.testng.Assert;
 
 
@@ -210,4 +213,48 @@ public class SessionsRequests extends MainApplication {
         String json = new JsonStats().getLaunches();
         return post_response(json, url, data);
     }
+
+    // Получение данных о запусках приложения с разных платформ
+    public JsonObject statsFetchPlatformLaunches(){
+        String url = "/stats/fetchPlatformLaunches";
+        String json = "{}";
+        return post_response(json, url, data);
+    }
+
+    public JsonObject featureGetForProduct(String product_id){
+        String url = "/feature/getForProduct";
+        String json = new JsonFeature().getForProduct(product_id);
+        return post_response(json, url, data);
+    }
+
+    public JsonObject appLaunch(String deviceId, String deviceName, String os){
+        String url = "/stats/appLaunch";
+        String json = new JsonStats().appLaunch(deviceId, deviceName, os);
+        return post_response(json, url, data);
+    }
+
+    public JsonObject logOut(){
+        String url = "/logOut";
+        String json = "{}";
+        return post_response(json, url, data);
+    }
+
+    public JsonObject isServiceEnabled(String service_code){
+        String url = "/isServiceEnabled";
+        String json = "{\"serviceCode\": \""+service_code+"\"}";
+        return post_response(json, url, data);
+    }
+
+    public Response serverTime(){
+        String url = data.getUrl_4talk() + "/time";
+        return get_response(url);
+    }
+
+    public JsonObject check(String auth_token){
+        String url = data.getUrl_auth() + "/check";
+        String get_request = RestAssured.given().parameter("auth_token", auth_token).get(url).asString();
+        System.out.println("\nResponse for " + url + ":\n" + get_request);
+        return JsonParser.parseString(get_request).getAsJsonObject();
+    }
+
 }
