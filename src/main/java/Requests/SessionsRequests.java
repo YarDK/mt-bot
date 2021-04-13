@@ -95,6 +95,10 @@ public class SessionsRequests extends MainApplication {
                 .getAsJsonObject("status")
                 .get("lastSeen").getAsString());
 
+        data.withLastSid(response_start_session
+                .getAsJsonObject("data")
+                .get("lastSid").getAsString());
+
         // По идеи не работает для карточки, где несколько номеров
         try {
             JsonObject numbers = response_start_session
@@ -255,6 +259,12 @@ public class SessionsRequests extends MainApplication {
         String get_request = RestAssured.given().parameter("auth_token", auth_token).get(url).asString();
         System.out.println("\nResponse for " + url + ":\n" + get_request);
         return JsonParser.parseString(get_request).getAsJsonObject();
+    }
+
+    public JsonObject pollEvents(String lastSid){
+        String url = "/pollEvents";
+        String json = "{\"lastSid\": \""+lastSid+"\"}";
+        return post_response(json, url, data);
     }
 
 }

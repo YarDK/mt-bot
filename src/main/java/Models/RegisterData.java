@@ -30,6 +30,7 @@ public class RegisterData {
     private long number_id;
     private String number;
     private String protocol;
+    private String lastSid;
 
     public String getUsername() {
         return username;
@@ -129,6 +130,10 @@ public class RegisterData {
 
     public String getProtocol(){
         return protocol;
+    }
+
+    public String getLastSid() {
+        return lastSid;
     }
 
     public RegisterData withUsername(String username) {
@@ -259,6 +264,11 @@ public class RegisterData {
 
     public RegisterData withProtocol(String protocol) {
         this.protocol = protocol;
+        return this;
+    }
+
+    public RegisterData withLastSid(String lastSid) {
+        this.lastSid = lastSid;
         return this;
     }
 }

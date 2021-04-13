@@ -150,6 +150,25 @@ public class TestSession extends TestBase {
         }
     }
 
+    @Test
+    public void testPollEvents(){
+        int case_id = 0;
+
+        JsonObject response = app.session().pollEvents(app.data().getLastSid());
+        int status_cod = response.get("statusCode").getAsInt();
+
+        if(status_cod == 200){
+            app.testrail().setResultCase(case_id, "passed", "PollEvents успешный.");
+        } else {
+            Assert.fail("PollEvents failed, result not 200");
+            app.testrail().setResultCase(
+                    case_id,
+                    "failed",
+                    "PollEvents не успешный, код ответ " + status_cod
+            );
+        }
+    }
+
 
 
 }
