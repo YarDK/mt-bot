@@ -21,7 +21,7 @@
             <class name="GroupChatTests"/>
             <class name="PersonalChatTests"/>
             <class name="CallHistoryTests"/>
-            <class name="SaveSettingsTest"/>
+            <class name="SettingsTest"/>
             <class name="StatusChangeTests"/>
         </classes>
     </test>

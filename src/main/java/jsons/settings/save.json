@@ -1,0 +1,162 @@
+{
+  "appSettings": {
+    "attachments": {
+      "autoDownload": true,
+      "autoDownloadLimit": 10485760,
+      "autoDownloadOnlyWifi": false
+    },
+    "calls": {
+      "feedback": true,
+      "feedbackCounter": 0,
+      "micGain": 120,
+      "speakerGain": 100
+    },
+    "chats": {
+      "sendTyping": true,
+      "syncOnPush": true
+    },
+    "contacts": {
+      "showFirstNameThenLastName": true,
+      "sortByFirstName": true
+    },
+    "notifications": {
+      "call": {
+        "enabled": true,
+        "lights": true,
+        "showContent": true,
+        "sound": "#builtin",
+        "vibrate": true
+      },
+      "channels": {
+        "enabled": true,
+        "lights": true,
+        "showContent": true,
+        "sound": "#builtin",
+        "vibrate": true
+      },
+      "contact": {
+        "enabled": true,
+        "lights": true,
+        "showContent": true,
+        "sound": "#builtin",
+        "vibrate": true
+      },
+      "group": {
+        "enabled": true,
+        "lights": true,
+        "showContent": true,
+        "sound": "#builtin",
+        "vibrate": true
+      },
+      "pendingWebchats": {
+        "enabled": false,
+        "lights": false,
+        "showContent": false,
+        "sound": "#builtin",
+        "vibrate": false
+      },
+      "reminder": {
+        "enabled": true,
+        "lights": true,
+        "showContent": true,
+        "sound": "#builtin",
+        "vibrate": true
+      },
+      "system": {
+        "enabled": true,
+        "lights": true,
+        "showContent": true,
+        "sound": "#builtin",
+        "vibrate": true
+      },
+      "useFullscreenActivity": true,
+      "webchats": {
+        "enabled": true,
+        "lights": true,
+        "showContent": true,
+        "sound": "#builtin",
+        "vibrate": true
+      }
+    },
+    "opusSettings": {
+      "bitrate": 0,
+      "cbr": false,
+      "complexity": 5,
+      "expectedPacketLoss": 5,
+      "sampleRate": 48000
+    },
+    "sip": {
+      "checkConnectionType": true,
+      "dtmfMode": "RFC2833",
+      "dtmfPayload": 96,
+      "enableAec": false,
+      "enableVideo": true,
+      "jitterBufferMode": "ADAPTIVE",
+      "jitterBufferSizeMilliseconds": 200,
+      "keepAlive": false,
+      "localPort": {
+        "portEnd": 65535,
+        "portStart": 5080
+      },
+      "qualityUpdatePeriodMilliseconds": 2000,
+      "rtpPort": {
+        "portEnd": 65535,
+        "portStart": 10000
+      }
+    },
+    "sipCodecs": [
+      {
+        "enabled": true,
+        "id": 3,
+        "name": "Opus"
+      },
+      {
+        "enabled": true,
+        "id": 1,
+        "name": "G.711a"
+      },
+      {
+        "enabled": true,
+        "id": 0,
+        "name": "G.729"
+      }
+    ],
+    "sipCodecsVersion": 3,
+    "worktime": {
+      "enabled": false,
+      "endMinutes": 1080,
+      "startMinutes": 540,
+      "workingDays": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        false
+      ]
+    }
+  },
+  "pushSettings": {
+    "callsPushesSound": "#builtin",
+    "channelsPushesSound": "#builtin",
+    "contactsPushesSound": "#builtin",
+    "enableCallsPushes": true,
+    "enableChannelsPushes": true,
+    "enableContactsPushes": false,
+    "enableGroupsPushes": true,
+    "enablePendingWebchatsPushes": false,
+    "enablePushes": true,
+    "enableSystemPushes": true,
+    "enableWebchatsPushes": true,
+    "groupsPushesSound": "#builtin",
+    "pendingWebchatsPushesSound": "#builtin",
+    "showChannelsPushesContent": true,
+    "showContactsPushesContent": true,
+    "showGroupsPushesContent": true,
+    "showPendingWebchatsPushesContent": false,
+    "showWebchatsPushesContent": true,
+    "systemPushesSound": "#builtin",
+    "webchatsPushesSound": "#builtin"
+  }
+}

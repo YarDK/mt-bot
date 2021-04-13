@@ -2,6 +2,7 @@ package Requests;
 
 import ApplicationManager.MainApplication;
 import jsons.settings.JsonSaveSettings;
+import jsons.settings.JsonSettings;
 import jsons.status.JsonStatus;
 import Models.RegisterData;
 import com.google.gson.JsonObject;
@@ -18,59 +19,57 @@ public class ProfileRequests extends MainApplication {
     }
 
     public JsonObject statusAway() {
-        String json_set_status_away = new JsonStatus().away();
-        System.out.println("\njson_set_status_away:\n" + json_set_status_away);
-        String url = data.getUrl_4talk() + "/changeStatus";
-        String set_status_away = RestAssured.given()
-                .auth().preemptive()
-                .basic(data.getAccount(), data.getHash())
-                .contentType(ContentType.JSON)
-                .body(json_set_status_away)
-                .post(url).asString();
-        System.out.println("\nResponse set_status_away:\n" + set_status_away);
-        return JsonParser.parseString(set_status_away).getAsJsonObject();
+        String json = new JsonStatus().away();
+        String url = "/changeStatus";
+        return post_response(json, url, data);
     }
 
     public JsonObject statusDND(long dndTillTime, String previousStatus) {
-        String json_set_status_dnd = new JsonStatus().dnd(dndTillTime, previousStatus);
-        System.out.println("\njson_set_status_dnd:\n" + json_set_status_dnd);
-        String url = data.getUrl_4talk() + "/changeStatus";
-        String set_status_dnd = RestAssured.given()
-                .auth().preemptive()
-                .basic(data.getAccount(), data.getHash())
-                .contentType(ContentType.JSON)
-                .body(json_set_status_dnd)
-                .post(url).asString();
-        System.out.println("\nResponse set_status_dnd:\n" + set_status_dnd);
-        return JsonParser.parseString(set_status_dnd).getAsJsonObject();
+        String json = new JsonStatus().dnd(dndTillTime, previousStatus);
+        String url = "/changeStatus";
+        return post_response(json, url, data);
     }
 
     public JsonObject statusOnline() {
-        String json_set_status_online = new JsonStatus().online();
-        System.out.println("\njson_set_status_online:\n" + json_set_status_online);
-        String url = data.getUrl_4talk() + "/changeStatus";
-        String set_status_online = RestAssured.given()
-                .auth().preemptive()
-                .basic(data.getAccount(), data.getHash())
-                .contentType(ContentType.JSON)
-                .body(json_set_status_online)
-                .post(url).asString();
-        System.out.println("\nResponse set_status_online:\n" + set_status_online);
-        return JsonParser.parseString(set_status_online).getAsJsonObject();
+        String json = new JsonStatus().online();
+        String url = "/changeStatus";
+        return post_response(json, url, data);
     }
 
     public JsonObject saveSettings(String number, long number_id, String protocol) {
-        String json_save_settings = new JsonSaveSettings().saveSettings(number, number_id, protocol);
-        System.out.println("\njson_save_settings:\n" + json_save_settings);
-        String url = data.getUrl_4talk() + "/calls/saveSettings";
-        String save_settings = RestAssured.given()
-                .auth().preemptive()
-                .basic(data.getAccount(), data.getHash())
-                .contentType(ContentType.JSON)
-                .body(json_save_settings)
-                .post(url).asString();
-        System.out.println("\nResponse save_settings:\n" + save_settings);
-        return JsonParser.parseString(save_settings).getAsJsonObject();
+        String json = new JsonSaveSettings().saveSettings(number, number_id, protocol);
+        String url = "/calls/saveSettings";
+        return post_response(json, url, data);
+    }
+
+    public JsonObject settingsGet() {
+        String json = "{}";
+        String url = "/settings/get";
+        return post_response(json, url, data);
+    }
+
+    public JsonObject settingsSave() {
+        String json = getJson("src/main/java/jsons/settings/save.json");
+        String url = "/settings/save";
+        return post_response(json, url, data);
+    }
+
+    public JsonObject setWorkingHours(Boolean isEnabled){
+        String json = new JsonSettings().setWorkingHours(isEnabled);
+        String url = "/settings/setWorkingHours";
+        return post_response(json, url, data);
+    }
+
+    public JsonObject notificationsUpdate(){
+        String json = "{\"intervalDays\":1,\"email\":\"pochta@mail.com\",\"missedMessages\":true,\"missedCalls\":true}";
+        String url = "/settings/notifications/update";
+        return post_response(json, url, data);
+    }
+
+    public JsonObject notificationsGet(){
+        String json = "{}";
+        String url = "/settings/notifications/gat";
+        return post_response(json, url, data);
     }
 
 }
