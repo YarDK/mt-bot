@@ -29,7 +29,7 @@ public class TestJsonRead {
         JsonArray history_arr = json_obj.getAsJsonObject("data").getAsJsonArray("history");
         for (JsonElement j : history_arr) {
             System.out.println("++++++++++++++");
-            System.out.println(j.getAsJsonObject().get("sid").getAsString());
+            System.out.println(j.getAsJsonObject());
         }
     }
 

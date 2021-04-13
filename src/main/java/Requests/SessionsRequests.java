@@ -1,18 +1,22 @@
 package Requests;
 
 import ApplicationManager.MainApplication;
+import Models.ExecuteData;
 import Models.RegisterData;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.http.ContentType;
 import jsons.stats.JsonStats;
 import org.testng.Assert;
 
+
 public class SessionsRequests extends MainApplication {
     public RegisterData data;
+    public ExecuteData execute_data;
 
-    public SessionsRequests(RegisterData data) {
+    public SessionsRequests(RegisterData data, ExecuteData executeData) {
         this.data = data;
+        this.execute_data = executeData;
     }
 
     // Автотизация на сервере и получение токена
@@ -151,6 +155,49 @@ public class SessionsRequests extends MainApplication {
                 200,
                 "Registration failed, result not 200");
     }
+
+    // EXECUTE-тище!!!!!!!
+    // выполнять, исполнять, осуществлять, казнить, убивать по политическим мотивам
+    public void execute(){
+        String url = data.getUrl_4talk() + "/execute";
+        String json = "{\"get-data\":[\"vcards\",\"devices\",\"confrooms\",\"personal\"],\"withAvatars\":0,\"from_ts\":0}";
+        String execute_response = RestAssured.given()
+                .auth()
+                .preemptive()
+                .basic(data.getAccount(), data.getHash())
+                .contentType(ContentType.JSON)
+                .body(json)
+                .post(url).asString();
+        System.out.println("\nResponse execute done!\n");
+        int status_cod = 0;
+        JsonObject execute_json = new JsonObject();
+
+        try {
+            execute_json = JsonParser.parseString(execute_response).getAsJsonObject();
+            status_cod = execute_json.get("statusCode").getAsInt();
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+            execute_json.addProperty("response", execute_response);
+        }
+
+
+        if(status_cod == 200){
+            JsonArray vcards_arr = execute_json.getAsJsonObject("data").getAsJsonArray("vcards");
+            JsonArray devices_arr = execute_json.getAsJsonObject("data").getAsJsonArray("devices");
+            JsonArray confrooms_arr = execute_json.getAsJsonObject("data").getAsJsonArray("confrooms");
+            JsonArray personal_arr = execute_json.getAsJsonObject("data").getAsJsonArray("personal");
+
+            execute_data
+                    .withPersonal(createSetFromJsonArray(personal_arr))
+                    .withConfrooms(createSetFromJsonArray(confrooms_arr))
+                    .withDevices(createSetFromJsonArray(devices_arr))
+                    .withVcards(createSetFromJsonArray(vcards_arr));
+
+        } else {
+            Assert.fail("ERROR# Request execute failed!");
+        }
+    }
+
 
     public JsonObject statsGetData(){
         String url = "/stats/getData";

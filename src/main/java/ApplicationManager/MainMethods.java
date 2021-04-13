@@ -120,5 +120,13 @@ public class MainMethods {
         return get_request;
     }
 
+    public Set<String> createSetFromJsonArray(JsonArray jsonArray){
+        Set<String> set = new HashSet<>();
+        for (JsonElement j : jsonArray) {
+            set.add(j.getAsJsonObject().toString());
+        }
+        return set;
+    }
+
 
 }

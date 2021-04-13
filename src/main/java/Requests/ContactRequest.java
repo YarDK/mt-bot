@@ -7,6 +7,7 @@ import com.google.gson.JsonParser;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
 import jsons.contacts.addressbook.*;
+import jsons.contacts.employee.JsonEmployee;
 import jsons.contacts.personal.*;
 
 public class ContactRequest extends MainApplication {
@@ -92,6 +93,20 @@ public class ContactRequest extends MainApplication {
     public JsonObject personalContactGetList(){
         String json = "{}";
         String url = "/personal/getList";
+        return post_response(json, url, data);
+    }
+
+    //Список сотрудников (метод не используется, заменен на Execute
+    public JsonObject rosterGetList(){
+        String json = "{}";
+        String url = "/roster/getList";
+        return post_response(json, url, data);
+    }
+
+    // Добавить в Избранное сотрудника
+    public JsonObject rosterEdit(String account, Boolean pinned){
+        String json = new JsonEmployee().rosterEdit(account,pinned);
+        String url = "/roster/edit";
         return post_response(json, url, data);
     }
 

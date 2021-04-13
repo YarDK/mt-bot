@@ -1,5 +1,6 @@
 package ApplicationManager;
 
+import Models.ExecuteData;
 import Models.RegisterData;
 import Models.TestrailData;
 import Requests.*;
@@ -7,6 +8,7 @@ import Requests.*;
 public class MainApplication extends MainMethods{
 
     private RegisterData registerData;
+    private ExecuteData executeData;
     private TestrailHelper testrailHelper;
     private CallHistoryRequests callHistoryRequests;
     private ChatRequests chatRequests;
@@ -19,10 +21,12 @@ public class MainApplication extends MainMethods{
     public void init(String environment) {
         System.out.printf("ENVIRONMENT - Tests running on environment: %s\n%n",environment);
         registerData = new RegisterHelper().registerData(environment);
-        sessionsRequests = new SessionsRequests(registerData);
+        executeData = new ExecuteData();
+        sessionsRequests = new SessionsRequests(registerData, executeData);
         sessionsRequests.authorisation();
         sessionsRequests.registration();
         sessionsRequests.startSession();
+        sessionsRequests.execute();
 
 
         callHistoryRequests = new CallHistoryRequests(registerData);
@@ -42,6 +46,10 @@ public class MainApplication extends MainMethods{
 
     public RegisterData data(){
         return registerData;
+    }
+
+    public ExecuteData execute_data(){
+        return executeData;
     }
 
     public TestrailHelper testrail(){return testrailHelper;}
