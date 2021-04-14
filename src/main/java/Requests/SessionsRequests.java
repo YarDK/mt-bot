@@ -254,6 +254,7 @@ public class SessionsRequests extends MainApplication {
         return get_response(url);
     }
 
+    // Уникальный метод для Минского API.
     public JsonObject check(String auth_token){
         String url = data.getUrl_auth() + "/check";
         String get_request = RestAssured.given().parameter("auth_token", auth_token).get(url).asString();
