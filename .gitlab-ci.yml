@@ -1,6 +1,13 @@
-stages:
-  - test
+image: java:latest
 
-test:
-  stage: test
-  script: echo $CI_PROJECT_DIR/
+stages:
+  - execute
+
+execute:
+  stage: execute
+  script:
+    - cd C:\Users\wshp415mskadmin_test\java_projeckt\ServerAuth
+    - mvn clean -Dtest=TestSession test
+  artifacts:
+  tags:
+    - wshp415msk
