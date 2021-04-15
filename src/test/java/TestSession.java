@@ -94,6 +94,7 @@ public class TestSession extends TestBase {
     public void testIsServiceEnabled(){
         int case_id = 0;
 
+        // SRTP_ENCRYPTION  - SRTP
         String service_code = "CALLS_REC";
 
         JsonObject response = app.session().isServiceEnabled(service_code);

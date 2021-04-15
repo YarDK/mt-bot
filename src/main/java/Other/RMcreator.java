@@ -15,8 +15,8 @@ public class RMcreator {
     private static WebDriver wd;
 
     public static void main(String[] args) {
-        String old_url = "http://redmine.mango.local/issues/235177";
-        String new_url = "http://redmine.mango.local/issues/239671";
+        String old_url = "http://redmine.mango.local/issues/239671";
+        String new_url = "http://redmine.mango.local/issues/246745";
         init(old_url, new_url);
         stop();
     }
@@ -36,6 +36,7 @@ public class RMcreator {
         // System.setProperty("webdriver.chrome.driver", "../RMapp/src/main/resources/chromedriver.exe");
         //ChromeOptions chromeOptions = new ChromeOptions();
         //chromeOptions.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+        System.setProperty("webdriver.chrome.driver","C:/chromedriver/chromedriver.exe");
         wd = new ChromeDriver();
 
         wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
@@ -71,6 +72,7 @@ public class RMcreator {
                 e.findElement(By.cssSelector("td.buttons")).findElement(By.tagName("a")).click();
                 try {
                     wd.switchTo().alert().accept();
+                    waiter(200);
                 } catch (NoAlertPresentException e1){
                     System.out.println("WARN - no such alert");
                     e1.printStackTrace();
