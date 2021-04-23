@@ -68,7 +68,7 @@ public class ProfileRequests extends MainApplication {
 
     public JsonObject notificationsGet(){
         String json = "{}";
-        String url = "/settings/notifications/gat";
+        String url = "/settings/notifications/get";
         return post_response(json, url, data);
     }
 
