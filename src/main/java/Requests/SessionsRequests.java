@@ -24,13 +24,14 @@ public class SessionsRequests extends MainApplication {
 
     // Автотизация на сервере и получение токена
     public void authorisation() {
-        String url = data.getUrl_auth() + "/auth/vpbx";
+        String url_auth = data.getUrl_auth() + "/auth/vpbx";
         String auth_vpbx = RestAssured.given()
                 .parameter("username", data.getUsername())
                 .parameter("password", data.getPassword())
                 .parameter("deviceId", data.getDevice_id())
                 .parameter("app", data.getApplication())
-                .post(url).asString();
+                .post(url_auth).asString();
+
         System.out.println("Response auth_vpbx:\n" + auth_vpbx);
         JsonObject json_auth_token = JsonParser.parseString(auth_vpbx).getAsJsonObject();
         Assert.assertEquals(
@@ -38,9 +39,23 @@ public class SessionsRequests extends MainApplication {
                 1000,
                 "Authorisation failed, result not 1000");
 
-        data.withAuth_token(json_auth_token.getAsJsonObject().get("auth_token").getAsString());
+        data.withAuth_token(json_auth_token.get("auth_token").getAsString());
+        data.withRefresh_token(json_auth_token.get("refresh_token").getAsString());
+
+        // Дополнительный метод для получения ticket
+        String url_ticket = data.getUrl_auth() + "/auth/ticket/step1";
+        String ticket_response = RestAssured.given()
+                .parameter("auth_token", data.getAuth_token())
+                .parameter("refresh_token", data.getRefresh_token())
+                .post(url_ticket).asString();
+
+        JsonObject json_ticket_response = JsonParser.parseString(ticket_response).getAsJsonObject();
+        data.withTicket(json_ticket_response.get("ticket").getAsString());
+
+        System.out.println("Auth_ticket response:\n" + ticket_response);
         System.out.println("\nAuth_token:\n" + data.getAuth_token());
     }
+
 
     // Получение Credentials (пара логин и пароль)
     public void credentials(){

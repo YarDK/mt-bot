@@ -23,6 +23,8 @@ public class RegisterData {
     private String account;
     private String hash;
     private String auth_token;
+    private String refresh_token;
+    private String ticket;
 
     private String abonent_id;
     private String product_id;
@@ -106,6 +108,14 @@ public class RegisterData {
 
     public String getAuth_token() {
         return auth_token;
+    }
+
+    public String getRefresh_token() {
+        return refresh_token;
+    }
+
+    public String getTicket() {
+        return ticket;
     }
 
     public String getAbonent_id() {
@@ -230,6 +240,17 @@ public class RegisterData {
         this.auth_token = auth_token;
         return this;
     }
+
+    public RegisterData withRefresh_token(String refresh_token) {
+        this.refresh_token = refresh_token;
+        return this;
+    }
+
+    public RegisterData withTicket(String ticket){
+        this.ticket = ticket;
+        return this;
+    }
+
 
     public RegisterData withCredentials(String credentials){
         this.username = credentials.split(":")[0];
