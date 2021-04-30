@@ -40,7 +40,7 @@ public class ContactPersonalTests extends TestBase {
 
     @Test
     public void testPersonalContactSave(){
-        int case_id = 0;
+        int case_id = 1404287;
 
         JsonObject json_personal_save = app.contact().personalContactSave();
         int status_cod = json_personal_save.get("statusCode").getAsInt();
@@ -55,7 +55,7 @@ public class ContactPersonalTests extends TestBase {
 
     @Test
     public void testPersonalContactGetList(){
-        int case_id = 0;
+        int case_id = 1404290;
 
         JsonObject json_personal_save = app.contact().personalContactGetList();
         int status_cod = json_personal_save.get("statusCode").getAsInt();
@@ -71,7 +71,7 @@ public class ContactPersonalTests extends TestBase {
 
     @Test(enabled = false)
     public void testPersonalContactRemoveAll(){
-        int case_id = 0;
+        int case_id = 1404293;
 
         JsonObject json_personal_save = app.contact().personalContactRemoveAll();
         int status_cod = json_personal_save.get("statusCode").getAsInt();

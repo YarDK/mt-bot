@@ -22,7 +22,7 @@ public class SettingsTest extends TestBase{
 
     @Test
     public void testSettingsGet(){
-        int case_id = 0;
+        int case_id = 1404350;
 
         JsonObject response = app.profile().settingsGet();
         int status_cod = response.get("statusCode").getAsInt();
@@ -38,7 +38,7 @@ public class SettingsTest extends TestBase{
 
     @Test
     public void testSettingsSave(){
-        int case_id = 0;
+        int case_id = 1405073;
 
         JsonObject response = app.profile().settingsSave();
         int status_cod = response.get("statusCode").getAsInt();
@@ -53,7 +53,7 @@ public class SettingsTest extends TestBase{
 
     @Test
     public void testSetWorkingHours(){
-        int case_id = 0;
+        int case_id = 1405076;
 
         JsonObject response_on = app.profile().setWorkingHours(true);
         int status_cod_on = response_on.get("statusCode").getAsInt();
@@ -80,7 +80,7 @@ public class SettingsTest extends TestBase{
 
     @Test
     public void testNotificationsUpdate(){
-        int case_id = 0;
+        int case_id = 1405079;
 
         JsonObject response = app.profile().notificationsUpdate();
         int status_cod = response.get("statusCode").getAsInt();
@@ -101,7 +101,7 @@ public class SettingsTest extends TestBase{
 
     @Test
     public void testNotificationsGet(){
-        int case_id = 0;
+        int case_id = 1405082;
 
         JsonObject response = app.profile().notificationsGet();
         int status_cod = response.get("statusCode").getAsInt();

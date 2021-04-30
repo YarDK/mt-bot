@@ -8,7 +8,7 @@ public class EmployeeTests extends TestBase{
     @Test
     public void testRosterEdit() {
         // Добавить и убрать из избранных
-        int case_id = 0;
+        int case_id = 1404296;
         String vcard_iterate = app.execute_data().getVcards().iterator().next();
         String account = JsonParser.parseString(vcard_iterate).getAsJsonObject().get("account").getAsString();
 

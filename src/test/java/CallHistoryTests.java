@@ -173,7 +173,7 @@ public class CallHistoryTests extends TestBase {
 
     @Test(enabled = false)
     public void testCallsRemoveAll(){
-        int case_id = 0;
+        int case_id = 1347065;
         // Добавить sid звонка, до которого надо удалить все записи
         String sid = "";
 
@@ -237,7 +237,7 @@ public class CallHistoryTests extends TestBase {
 
     @Test(enabled = false)
     public void testCallsNotesSave(){
-        int case_id = 0;
+        int case_id = 1404269;
         String sid = "417519551034404480";
 
         int status_cod = app.callHistory().callsNotesSave(sid).get("statusCode").getAsInt();

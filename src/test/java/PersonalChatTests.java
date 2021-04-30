@@ -30,7 +30,7 @@ public class PersonalChatTests extends TestBase {
 
     @Test
     public void testMessageEdit(){
-        int case_id = 0;
+        int case_id = 1404317;
         JsonObject response_message_edit = app.chat().messageEdit(account,msg_sid,local_id);
         int status_cod = response_message_edit.get("statusCode").getAsInt();
 
@@ -44,7 +44,7 @@ public class PersonalChatTests extends TestBase {
 
     @Test
     public void testMessageForward(){
-        int case_id = 0;
+        int case_id = 1404320;
         JsonObject response_message_edit = app.chat().messageForward(account,msg_sid,local_id);
         int status_cod = response_message_edit.get("statusCode").getAsInt();
 
@@ -58,7 +58,7 @@ public class PersonalChatTests extends TestBase {
 
     @Test
     public void testMessageSearchInPersonalChat(){
-        int case_id = 0;
+        int case_id = 1404323;
         JsonObject response_message_edit = app.chat().messageSearchInPersonalChat(account);
         int status_cod = response_message_edit.get("statusCode").getAsInt();
 
@@ -73,7 +73,7 @@ public class PersonalChatTests extends TestBase {
 
     @Test(enabled = false)
     public void testMessageRemoveByType(){
-        int case_id = 0;
+        int case_id = 1404326;
         // Не очень понятно как этот метод работает
         // На клиенте реализации такой нет
         String type = "call";
@@ -94,7 +94,7 @@ public class PersonalChatTests extends TestBase {
 
     @Test
     public void testMessageRemove(){
-        int case_id = 0;
+        int case_id = 1404329;
 
         // Оправляем другое сообщения, что бы потом удалить его и не афектить другие кейсы
         String local_id = "123def0123456789abc" + System.currentTimeMillis();
@@ -161,7 +161,7 @@ public class PersonalChatTests extends TestBase {
 
     @Test
     public void testMessageSentSms(){
-        int case_id = 0;
+        int case_id = 1404332;
 
         JsonObject response_message_send_sms = app.chat().messageSendSms(local_id);
         sms_sid = response_message_send_sms.get("data").getAsJsonArray().get(0).getAsJsonObject().get("sid").getAsString();
@@ -177,7 +177,7 @@ public class PersonalChatTests extends TestBase {
 
     @Test
     public void testMessageHistory(){
-        int case_id = 0;
+        int case_id = 1404335;
 
         JsonObject response_message_history = app.chat().messageHistory(account);
         int status_cod = response_message_history.get("statusCode").getAsInt();
@@ -196,7 +196,7 @@ public class PersonalChatTests extends TestBase {
 
     @Test
     public void testMessageNotifyTyping(){
-        int case_id = 0;
+        int case_id = 1404338;
 
         JsonObject response_message_history = app.chat().messageNotifyTyping(account);
         int status_cod = response_message_history.get("statusCode").getAsInt();
@@ -215,7 +215,7 @@ public class PersonalChatTests extends TestBase {
 
     @Test
     public void testMessageNotifyDelivered(){
-        int case_id = 0;
+        int case_id = 1404341;
 
         JsonObject response_message_history = app.chat().messageNotifyDelivered(account, msg_sid);
         int status_cod = response_message_history.get("statusCode").getAsInt();
@@ -233,26 +233,26 @@ public class PersonalChatTests extends TestBase {
     }
     @Test
     public void testMessageNotifyReadAll(){
-        int case_id = 0;
+        int case_id = 1404344;
 
         JsonObject response_message_history = app.chat().messageNotifyReadAll(account, msg_sid);
         int status_cod = response_message_history.get("statusCode").getAsInt();
 
         if(status_cod == 200){
-            app.testrail().setResultCase(case_id, "passed", "История сообщений успешно запрошена");
+            app.testrail().setResultCase(case_id, "passed", "Уведомление о прочтении всех сообщений успешно");
         } else {
             Assert.fail("MessageHistory failed, result not 200");
             app.testrail().setResultCase(
                     case_id,
                     "failed",
-                    "Не удалось запросить историю сообщений, код ответ " + status_cod
+                    "Уведомление о прочтении всех сообщений не успешно, код ответ " + status_cod
             );
         }
     }
 
     @Test(priority = 1)
     public void testMessageResendSms(){
-        int case_id = 0;
+        int case_id = 1404347;
 
         JsonObject response_message_resend_sms = app.chat().messageResendSms(sms_sid);
         int status_cod = response_message_resend_sms.get("statusCode").getAsInt();

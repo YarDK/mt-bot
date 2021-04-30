@@ -82,7 +82,7 @@ public class GroupChatTests extends TestBase {
     public void testGetAvatar(){
         app.waiter(1000);
 
-        int case_id = 0;
+        int case_id = 1404299;
         Response response_get_avatar = app.chat().getAvatar(avatar_id);
         int status_cod = response_get_avatar.getStatusCode();
 
@@ -114,7 +114,7 @@ public class GroupChatTests extends TestBase {
 
     @Test(priority = 3)
     public void testGroupChatOffline(){
-        int case_id = 0;
+        int case_id = 1404302;
         JsonObject response_group_chat_online = app.chat().chatOffline(account);
         int status_cod = response_group_chat_online.get("statusCode").getAsInt();
 
@@ -132,7 +132,7 @@ public class GroupChatTests extends TestBase {
 
     @Test(priority = 4)
     public void testGroupChatOnline(){
-        int case_id = 0;
+        int case_id = 1404305;
         JsonObject response_group_chat_online = app.chat().chatOnline(account);
         int status_cod = response_group_chat_online.get("statusCode").getAsInt();
 
@@ -150,36 +150,36 @@ public class GroupChatTests extends TestBase {
 
     @Test(priority = 5)
     public void testGroupChatMuteOn(){
-        int case_id = 0;
+        int case_id = 1404311;
         JsonObject response_group_chat_online = app.chat().chatMuteOn(account);
         int status_cod = response_group_chat_online.get("statusCode").getAsInt();
 
         if(status_cod == 200){
-            app.testrail().setResultCase(case_id, "passed", "Групповой чат успешно размьючен");
+            app.testrail().setResultCase(case_id, "passed", "Групповой чат успешно замьючен");
         } else {
             Assert.fail("Group chat mute not on, result not 200");
             app.testrail().setResultCase(
                     case_id,
                     "failed",
-                    "Групповой чат не размьючен, код ответ " + status_cod
+                    "Групповой чат не замьючен, код ответ " + status_cod
             );
         }
     }
 
     @Test(priority = 6)
     public void testGroupChatMuteOff(){
-        int case_id = 0;
+        int case_id = 1404314;
         JsonObject response_group_chat_online = app.chat().chatMuteOff(account);
         int status_cod = response_group_chat_online.get("statusCode").getAsInt();
 
         if(status_cod == 200){
-            app.testrail().setResultCase(case_id, "passed", "Групповой чат успешно замьючен");
+            app.testrail().setResultCase(case_id, "passed", "Групповой чат успешно размьючен");
         } else {
             Assert.fail("Group chat mute not off, result not 200");
             app.testrail().setResultCase(
                     case_id,
                     "failed",
-                    "Групповой чат не замьючен, код ответ " + status_cod
+                    "Групповой чат не размьючен, код ответ " + status_cod
             );
         }
     }

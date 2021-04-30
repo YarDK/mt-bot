@@ -10,7 +10,7 @@ public class TestBase {
 
     @BeforeSuite
     public void setUp(){
-        app.init(System.getProperty("environment","pres"));
+        app.init(System.getProperty("environment","prod"));
         // Что бы отключить интеграцию с ТестРеил, надо закомментировать инициализацю ниже
         app.testrail().init();
         app.testrail().startRun();

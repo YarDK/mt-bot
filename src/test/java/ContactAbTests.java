@@ -64,7 +64,7 @@ public class ContactAbTests extends TestBase{
 
     @Test
     public void testContactQuery(){
-        int case_id = 0;
+        int case_id = 1404272;
         JsonObject response_contact_query = app.contact().addressBookQuery(contact_name);
         int result_cod = response_contact_query.get("result").getAsJsonObject().get("code").getAsInt();
 
@@ -82,7 +82,7 @@ public class ContactAbTests extends TestBase{
 
     @Test
     public void testContactSrcList(){
-        int case_id = 0;
+        int case_id = 1404275;
         JsonObject response_contact_query = app.contact().addressBookSrcList(product_id);
         int result_cod = response_contact_query.get("result").getAsJsonObject().get("code").getAsInt();
 
@@ -100,7 +100,7 @@ public class ContactAbTests extends TestBase{
 
     @Test
     public void testContactQueryByPhone(){
-        int case_id = 0;
+        int case_id = 1404278;
         JsonObject response_contact_query = app.contact().addressBookQueryByPhone(product_id);
         int result_cod = response_contact_query.get("result").getAsJsonObject().get("code").getAsInt();
 
@@ -119,11 +119,20 @@ public class ContactAbTests extends TestBase{
 
     @Test(priority = 1)
     public void testGetContactAb(){
+        int case_id = 1404281;
+
         JsonObject contact_get_response = app.contact().addressBookGetContact(product_id, contact_id);
-        Assert.assertEquals(
-                contact_get_response.getAsJsonObject("result").get("code").getAsInt(),
-                1000,
-                "Contact get failed, result not 1000");
+        int result_cod =  contact_get_response.getAsJsonObject("result").get("code").getAsInt();
+        if(result_cod == 1000){
+            app.testrail().setResultCase(case_id, "passed", "Контакт успешно запрошен по ID");
+        } else {
+            Assert.fail("Contact get failed, result not 1000");
+            app.testrail().setResultCase(
+                    case_id,
+                    "failed",
+                    "Контакт адресной книги компании запросить по ID не удалось, код ответа " + result_cod
+            );
+        }
     }
 
     @AfterClass

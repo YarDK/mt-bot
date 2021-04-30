@@ -31,7 +31,7 @@ public class TestSession extends TestBase {
 
     @Test
     public void testFeatureGetForProduct(){
-        int case_id = 0;
+        int case_id = 1405088;
 
         JsonObject response = app.session().featureGetForProduct(app.data().getProduct_id());
         int status_cod = response.get("statusCode").getAsInt();
@@ -50,7 +50,7 @@ public class TestSession extends TestBase {
 
     @Test
     public void testAppLaunch(){
-        int case_id = 0;
+        int case_id = 1405091;
 
         String deviceId= app.data().getDevice_id();
         String deviceName= app.data().getDevice_name();
@@ -92,7 +92,7 @@ public class TestSession extends TestBase {
 
     @Test
     public void testIsServiceEnabled(){
-        int case_id = 0;
+        int case_id = 1405094;
 
         // SRTP_ENCRYPTION  - SRTP
         String service_code = "CALLS_REC";
@@ -114,7 +114,7 @@ public class TestSession extends TestBase {
 
     @Test
     public void testServerTime(){
-        int case_id = 0;
+        int case_id = 1405097;
 
         Response response = app.session().serverTime();
         int status_cod = response.getStatusCode();
@@ -134,7 +134,7 @@ public class TestSession extends TestBase {
 
     @Test
     public void testCheck(){
-        int case_id = 0;
+        int case_id = 1405100;
 
         JsonObject response = app.session().check(app.data().getAuth_token());
         int status_cod = response.get("result").getAsInt();
@@ -153,7 +153,7 @@ public class TestSession extends TestBase {
 
     @Test
     public void testPollEvents(){
-        int case_id = 0;
+        int case_id = 1405103;
 
         JsonObject response = app.session().pollEvents(app.data().getLastSid());
         int status_cod = response.get("statusCode").getAsInt();
