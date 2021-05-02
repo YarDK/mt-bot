@@ -1,16 +1,13 @@
 package Requests;
 
-import ApplicationManager.MainApplication;
+import ApplicationManager.RunnerApplication;
 import jsons.settings.JsonSaveSettings;
 import jsons.settings.JsonSettings;
 import jsons.status.JsonStatus;
 import Models.RegisterData;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.http.ContentType;
 
-public class ProfileRequests extends MainApplication {
+public class ProfileRequests extends RunnerApplication {
 
     RegisterData data;
 

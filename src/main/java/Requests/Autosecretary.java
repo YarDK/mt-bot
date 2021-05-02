@@ -1,6 +1,6 @@
 package Requests;
 
-import ApplicationManager.MainApplication;
+import ApplicationManager.RunnerApplication;
 import Models.RegisterData;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -9,7 +9,7 @@ import com.jayway.restassured.http.ContentType;
 import jsons.autosecretary.JsonAutosecretary;
 import jsons.product.JsonProduct;
 
-public class Autosecretary extends MainApplication {
+public class Autosecretary extends RunnerApplication {
 
     RegisterData data;
 

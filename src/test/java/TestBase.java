@@ -1,10 +1,10 @@
-import ApplicationManager.MainApplication;
+import ApplicationManager.RunnerApplication;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 
 public class TestBase {
-    protected static MainApplication app = new MainApplication();
+    protected static RunnerApplication app = new RunnerApplication();
 
 
 

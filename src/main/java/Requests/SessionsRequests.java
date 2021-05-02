@@ -1,6 +1,6 @@
 package Requests;
 
-import ApplicationManager.MainApplication;
+import ApplicationManager.RunnerApplication;
 import Models.ExecuteData;
 import Models.RegisterData;
 import com.google.gson.*;
@@ -9,11 +9,10 @@ import com.jayway.restassured.http.ContentType;
 import com.jayway.restassured.response.Response;
 import jsons.feature.JsonFeature;
 import jsons.stats.JsonStats;
-import org.openqa.selenium.json.Json;
 import org.testng.Assert;
 
 
-public class SessionsRequests extends MainApplication {
+public class SessionsRequests extends RunnerApplication {
     public RegisterData data;
     public ExecuteData execute_data;
 

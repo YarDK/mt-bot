@@ -1,6 +1,6 @@
 package Requests;
 
-import ApplicationManager.MainApplication;
+import ApplicationManager.RunnerApplication;
 import com.jayway.restassured.builder.MultiPartSpecBuilder;
 import com.jayway.restassured.response.Response;
 import jsons.channel.JsonChannel;
@@ -11,11 +11,10 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
-import org.openqa.selenium.json.Json;
 
 import java.io.File;
 
-public class ChatRequests extends MainApplication {
+public class ChatRequests extends RunnerApplication {
     
     RegisterData data;
 
@@ -98,6 +97,12 @@ public class ChatRequests extends MainApplication {
 
     public JsonObject personalChatCreate(String local_id, String account){
         String json = new JsonPersonalChat().createPersonalChat(local_id, account);
+        String url = "/message/send";
+        return post_response(json, url, data);
+    }
+
+    public JsonObject personalChatCreate(String local_id, String account, String message){
+        String json = new JsonPersonalChat().createPersonalChat(local_id, account, message);
         String url = "/message/send";
         return post_response(json, url, data);
     }

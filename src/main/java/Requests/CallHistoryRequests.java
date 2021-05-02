@@ -1,13 +1,13 @@
 package Requests;
 
-import ApplicationManager.MainApplication;
+import ApplicationManager.RunnerApplication;
 import jsons.calls.JsonCalls;
 import Models.RegisterData;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.jayway.restassured.RestAssured;
 
-public class CallHistoryRequests extends MainApplication {
+public class CallHistoryRequests extends RunnerApplication {
 
     RegisterData data;
 
