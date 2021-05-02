@@ -4,6 +4,16 @@
 <suite name="Suite1" verbose="1">
     <test name="All server test">
         <classes>
+
+        </classes>
+    </test>
+</suite>
+
+
+<!--
+<suite name="Suite1" verbose="1">
+    <test name="All server test">
+        <classes>
             <class name="AutosecretaryTests"/>
             <class name="CallHistoryTests"/>
             <class name="ChannelTests"/>
@@ -15,24 +25,6 @@
             <class name="SettingsTest"/>
             <class name="StatusChangeTests"/>
             <class name="TestSession"/>
-        </classes>
-    </test>
-</suite>
-
-
-<!--
-<suite name="Suite1" verbose="1">
-    <test name="All server test">
-        <classes>
-            <class name="AutosecretaryTests"/>
-            <class name="ContactAbTests"/>
-            <class name="ContactPersonalTests"/>
-            <class name="ChannelTests"/>
-            <class name="GroupChatTests"/>
-            <class name="PersonalChatTests"/>
-            <class name="CallHistoryTests"/>
-            <class name="SettingsTest"/>
-            <class name="StatusChangeTests"/>
         </classes>
     </test>
 </suite>

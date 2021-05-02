@@ -12,13 +12,13 @@ public class TestBase {
     public void setUp(){
         app.init(System.getProperty("environment","prod"));
         // Что бы отключить интеграцию с ТестРеил, надо закомментировать инициализацю ниже
-        app.testrail().init();
-        app.testrail().startRun();
+        //app.testrail().init();
+        //app.testrail().startRun();
     }
 
     @AfterSuite(alwaysRun = true)
     public void tearDown(){
         app.stop();
-        app.testrail().closeRun();
+        //app.testrail().closeRun();
     }
 }
